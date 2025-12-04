@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+
+@theme {
+    --color-border: hsl(var(--border));
+    --color-background: hsl(var(--background));
+
+    --color-foreground: hsl(var(--foreground));
+    --color-neutral: hsl(var(--color-slate-600));
+    --color-neutral-2: hsl(var(--color-slate-500));
+    --color-neutral-3: hsl(var(--color-slate-400));
+
+
+    --color-accent: hsl(var(--accent));
+    --color-accent-alt: hsl(var(--accent-alt));
+    --color-accent-light: hsl(var(--accent-light));
+
+    --color-purple: hsl(var(--purple));
+    --color-purple-2: hsl(var(--purple-2));
+
+    --color-primary-foreground: hsl(var(--primary-foreground));
+
+    /*--color-secondary: hsl(var(--secondary));*/
+    /*--color-secondary-foreground: hsl(var(--secondary-foreground));*/
+
+    --color-card: hsl(var(--card));
+
+    --animate-fade-in: fade-in 0.7s ease-out forwards;
+    --animate-fade-in-delay-1: fade-in 0.7s ease-out 0.2s forwards;
+    --animate-fade-in-delay-2: fade-in 0.7s ease-out 0.4s forwards;
+    --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
+    --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+@layer base {
+    :root {
+        --navbar-height: 4.2rem;
+        --footer-height: 3rem;
+
+        --background: 210 40% 98%;
+        --foreground: 222 47% 11%;
+
+        --accent: 186, 80%, 38%;
+        --accent-alt: 207, 57%, 36%;
+        --accent-light: 205, 28%, 63%;
+
+        --purple: 252, 56%, 24%;
+        --purple-2: 252, 46%, 33%;
+
+        --card: 0 0% 100%;
+
+        --primary: 250 47% 60%;
+        --primary-foreground: 210 40% 98%;
+
+        --border: 214 32% 91%;
+    }
+
+    .dark {
+        --background: 222 47% 4%;
+        --foreground: 213 31% 91%;
+
+        --card: 222 47% 8%;
+
+        --primary: 250 65% 65%;
+        --primary-foreground: 213 31% 91%;
+
+        --border: 217 33% 20%;
+    }
+
+    * {
+        @apply border-border;
+    }
+
+    html {
+        @apply scroll-smooth;
+    }
+
+    body {
+        @apply bg-background overflow-x-hidden text-foreground transition-colors duration-300;
+        font-feature-settings: "rlig" 1 "calt" 1;
+    }
+}
+
+@utility container {
+    margin-inline: auto;
+    padding-inline: auto;
+
+    @media (width >= 640px) {
+        max-width: 640px;
+    }
+    @media (width >= 768px) {
+        max-width: 768px;
+    }
+    @media (width >= 1024px) {
+        max-width: 1024px;
+    }
+    @media (width >= 1280px) {
+        max-width: 1280px;
+    }
+    @media (width >= 1400px) {
+        max-width: 1400px;
+    }
+}
+
+@utility text-glow {
+    @apply relative;
+    text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+}
+
+@utility card-hover {
+    @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
+}
+
+@utility gradient-border {
+    @apply relative rounded-md;
+    background: linear-gradient(to right, hsl(var(--card)));
+    background-clip: padding-box;
+    border: 1px solid transparent;
+}
+
+@utility text-gradient {
+    @apply w-fit;
+    background: linear-gradient(to left, hsl(var(--accent)), hsl(var(--purple-2)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@utility link-active {
+    @apply text-purple-2 bg-[rgba(134,173,204,0.28)]
+    hover:bg-[rgba(134,173,204,0.40)]
+}
+
+@utility button-gradient {
+    @apply flex items-center justify-center gap-1 space-x-2 px-4 py-2
+    bg-linear-to-r from-accent to-accent-alt
+    text-white rounded-xl text-base
+    whitespace-nowrap not-italic
+    hover:brightness-110 hover:scale-102 transition
+    duration-200 ease-out cursor-pointer
+    active:scale-96 disabled:bg-linear-to-r
+    disabled:from-slate-400 disabled:to-slate-500;
+}
+
+@utility simple-input {
+    @apply px-4 py-3 border border-slate-200 rounded-xl focus:ring-2
+    focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors;
+}
+
+#root {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
