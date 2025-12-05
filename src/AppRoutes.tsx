@@ -2,6 +2,8 @@ import {Route, Routes} from "react-router"
 import {HomeLayout} from "./layout/HomeLayout.tsx";
 import {Dashboard} from "./pages/Dashboard.tsx";
 import {CompletedBooks} from "./pages/CompletedBooks.tsx";
+import {UserConfig} from "./pages/UserConfig.tsx";
+import {ConfigLayout} from "./layout/ConfigLayout.tsx";
 
 
 export const AppRoutes = () => {
@@ -10,6 +12,12 @@ export const AppRoutes = () => {
             <Route path="/" element={<HomeLayout/>}>
                 <Route index element={<Dashboard/>}/>
                 <Route path="livros_concluidos/" element={<CompletedBooks/>}/>
+            </Route>
+
+            <Route path="/conta" element={<ConfigLayout/>}>
+                <Route path="configuracoes/" element={<UserConfig/>}/>
+                <Route path="metas/" element={<CompletedBooks/>}/>
+                <Route path="seguranca/" element={<CompletedBooks/>}/>
             </Route>
         </Routes>
     )

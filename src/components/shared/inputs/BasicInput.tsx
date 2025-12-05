@@ -1,0 +1,20 @@
+import {Label} from "./Label.tsx";
+
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
+    type?: "text";
+    label?: string;
+    className?: string;
+};
+
+export const BasicInput = ({ label, className, type = "text", ...props }: Props) => {
+    return (
+        <div className="flex flex-col gap-1 w-full">
+            {label && (<Label text={label} />)}
+            <input
+                type={type}
+                className={`input-form ${className}`}
+                {...props}
+            />
+        </div>
+    )
+}
