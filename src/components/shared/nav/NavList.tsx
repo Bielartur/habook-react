@@ -1,11 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHouse, faUser } from "@fortawesome/free-solid-svg-icons"
+import { faHouse} from "@fortawesome/free-solid-svg-icons"
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons"
 
 import { NavItem } from "./NavItem"
+import {ProfileDropdown} from "./ProfileDropdown.tsx";
 
 
 export const NavList = () => {
+
     return (
         <>
             <NavItem to="/">
@@ -17,10 +19,8 @@ export const NavList = () => {
                 <FontAwesomeIcon icon={faCircleCheck} />
                 Livros Concluídos
             </NavItem>
-            
-            <NavItem to="/">
-                <FontAwesomeIcon icon={faUser} />
-                Perfil
-            </NavItem></>
+
+            <ProfileDropdown />
+        </>
     )
 }

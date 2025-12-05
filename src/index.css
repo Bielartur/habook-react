@@ -48,7 +48,7 @@
         --navbar-height: 4.2rem;
         --footer-height: 3rem;
 
-        --background: 210 40% 98%;
+        --background: 210, 50%, 97%;
         --foreground: 222 47% 11%;
 
         --accent: 186, 80%, 38%;
@@ -136,6 +136,11 @@
     -webkit-text-fill-color: transparent;
 }
 
+@utility nav-item {
+    @apply py-2 px-3 rounded-lg h-fit flex justify-center items-center
+    transition-colors duration-300 text-slate-600 hover:bg-slate-200 hover:text-slate-700;
+}
+
 @utility link-active {
     @apply text-purple-2 bg-[rgba(134,173,204,0.28)]
     hover:bg-[rgba(134,173,204,0.40)]
@@ -155,6 +160,12 @@
 @utility simple-input {
     @apply px-4 py-3 border border-slate-200 rounded-xl focus:ring-2
     focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors;
+}
+
+@utility input-form {
+    @apply w-full px-3 py-2 border border-slate-400 rounded-xl focus:ring-accent
+    focus:border-accent outline-accent transition-colors
+    bg-slate-100 text-slate-600 placeholder:text-slate-400;
 }
 
 #root {

@@ -1,18 +1,18 @@
-import { Section } from "@/components/layout/Section"
-import { PageTitle } from "@/components/shared/titles/PageTitle"
+import { Section } from "../components/layout/Section"
+import { PageTitle } from "../components/shared/titles/PageTitle"
 
-import { CardContainer } from "@/components/shared/containers/CardContainer"
-import { ListCardsDashboard } from "@/components/dashboard/cardsDashboard/ListCardsDashboard"
-import { TitleChart } from "@/components/dashboard/charts/TitleChart"
-import { ProgressBarChart } from "@/components/dashboard/charts/ProgressBarChart"
-import { PagesPerDayChart } from "@/components/dashboard/charts/PagesPerDayChart"
-import { Subtitle } from "@/components/shared/titles/Subtitle"
-import {ListCurrentBooks} from "@/components/dashboard/currentBooks/ListCurrentBooks.tsx";
-import {ButtonGradient} from "@/components/shared/buttons/ButtonGradient.tsx";
+import { CardContainer } from "../components/shared/containers/CardContainer"
+import { ListCardsDashboard } from "../components/dashboard/cardsDashboard/ListCardsDashboard"
+import { TitleChart } from "../components/dashboard/charts/TitleChart"
+import { ProgressBarChart } from "../components/dashboard/charts/ProgressBarChart"
+import { PagesPerDayChart } from "../components/dashboard/charts/PagesPerDayChart"
+import { Subtitle } from "../components/shared/titles/Subtitle"
+import {ListCurrentBooks} from "../components/dashboard/currentBooks/ListCurrentBooks.tsx";
+import {ListCardRecentCompletedBooks} from "../components/dashboard/completedBooks/ListCardRecentCompletedBook.tsx";
+import {ButtonGradient} from "../components/shared/buttons/ButtonGradient.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router";
-import {ListCardRecentCompletedBooks} from "@/components/dashboard/completedBooks/ListCardRecentCompletedBook.tsx";
 
 
 export const Dashboard = () => {
