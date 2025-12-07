@@ -14,7 +14,7 @@ export const TitleConfig = ({ title, subtitle }: Props ) => {
                     </h2>
                 </div>
 
-                <p>{ subtitle }</p>
+                <p className="text-slate-600">{ subtitle }</p>
             </div>
         </div>
     )

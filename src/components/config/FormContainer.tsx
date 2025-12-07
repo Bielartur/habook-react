@@ -6,7 +6,7 @@ type Props = {
     children: React.ReactNode
 }
 
-export const ContainerForm = ({title, subtitle, children}: Props) => {
+export const FormContainer = ({title, subtitle, children}: Props) => {
     return (
         <form>
             <ConfigContainer>

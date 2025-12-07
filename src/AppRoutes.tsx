@@ -4,6 +4,7 @@ import {Dashboard} from "./pages/Dashboard.tsx";
 import {CompletedBooks} from "./pages/CompletedBooks.tsx";
 import {UserConfig} from "./pages/UserConfig.tsx";
 import {ConfigLayout} from "./layout/ConfigLayout.tsx";
+import {GoalsConfig} from "./pages/GoalsConfig.tsx";
 
 
 export const AppRoutes = () => {
@@ -16,7 +17,7 @@ export const AppRoutes = () => {
 
             <Route path="/conta" element={<ConfigLayout/>}>
                 <Route path="configuracoes/" element={<UserConfig/>}/>
-                <Route path="metas/" element={<CompletedBooks/>}/>
+                <Route path="metas/" element={<GoalsConfig/>}/>
                 <Route path="seguranca/" element={<CompletedBooks/>}/>
             </Route>
         </Routes>

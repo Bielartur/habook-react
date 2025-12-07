@@ -12,7 +12,9 @@ export const ConfigLayout = () => {
             <Main>
                 <Section className={"flex-row"}>
                     <Sidebar/>
-                    <Outlet/>
+                    <div className="w-full flex grow flex-col">
+                        <Outlet/>
+                    </div>
                 </Section>
             </Main>
             <Footer/>

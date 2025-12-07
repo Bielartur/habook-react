@@ -6,10 +6,6 @@
     --color-background: hsl(var(--background));
 
     --color-foreground: hsl(var(--foreground));
-    --color-neutral: hsl(var(--color-slate-600));
-    --color-neutral-2: hsl(var(--color-slate-500));
-    --color-neutral-3: hsl(var(--color-slate-400));
-
 
     --color-accent: hsl(var(--accent));
     --color-accent-alt: hsl(var(--accent-alt));
@@ -142,7 +138,7 @@
 }
 
 @utility link-active {
-    @apply text-purple-2 bg-[rgba(134,173,204,0.28)]
+    @apply text-purple-2 hover:text-purple-2 bg-[rgba(134,173,204,0.28)]
     hover:bg-[rgba(134,173,204,0.40)]
 }
 
