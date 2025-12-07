@@ -1,14 +1,14 @@
 import {ConfigContainer} from "./ConfigContainer.tsx";
 
-type Props = {
-    title: string
-    subtitle: string
-    children: React.ReactNode
-}
+type Props = React.FormHTMLAttributes<HTMLFormElement> & {
+    title: string;
+    subtitle: string;
+    children: React.ReactNode;
+};
 
-export const ContainerForm = ({title, subtitle, children}: Props) => {
+export const FormContainer = ({title, subtitle, children, ...props}: Props) => {
     return (
-        <form>
+        <form {...props}>
             <ConfigContainer>
                 <div className="flex flex-col gap-[0.1rem] mb-1 w-full">
                     <h3 className="text-xl font-bold text-slate-600">{title}</h3>

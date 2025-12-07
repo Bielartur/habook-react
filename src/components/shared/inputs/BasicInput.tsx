@@ -1,7 +1,7 @@
 import {Label} from "./Label.tsx";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
-    type?: "text";
+    type?: string;
     label?: string;
     className?: string;
 };

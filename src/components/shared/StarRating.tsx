@@ -20,7 +20,7 @@ export const StarRating = ({ rating }: Props) => {
 
             {/* estrelas vazias */}
             {[...Array(totalStars - normalizeRating)].map((_, i) => (
-                <FontAwesomeIcon key={`empty-${i}`} icon={faStarRegular} className="text-slate-300 text-sm" />
+                <FontAwesomeIcon key={`empty-${i}`} icon={faStarRegular} className="text-slate-400 text-sm" />
             ))}
         </div>
     );

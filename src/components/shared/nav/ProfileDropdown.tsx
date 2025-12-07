@@ -38,10 +38,10 @@ export const ProfileDropdown = () => {
                 aria-expanded={isOpen}
             >
                 <FontAwesomeIcon icon={faUser} />
-                <span className="ml-1">Perfil</span>
+                <span>Perfil</span>
                 <FontAwesomeIcon
                     icon={faChevronDown}
-                    className="text-slate-400 text-xs ml-1.5"
+                    className="text-slate-400 text-xs"
                 />
             </NavItemButton>
 

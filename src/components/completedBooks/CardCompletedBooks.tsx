@@ -1,7 +1,7 @@
 import {CardContainer} from "../shared/containers/CardContainer.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faStar} from "@fortawesome/free-solid-svg-icons";
-import {faCalendar, faStar as faStarRegular} from "@fortawesome/free-regular-svg-icons";
+import {faCalendar} from "@fortawesome/free-regular-svg-icons";
+import {StarRating} from "../shared/StarRating.tsx";
 
 
 type Props = {
@@ -43,11 +43,7 @@ export const CardCompletedBooks = ({ livro, userbook }: Props) => {
                     <p className="text-slate-600 text-sm">{autor}</p>
                 </div>
                 <div className="flex items-center space-x-1 mb-2">
-                    <FontAwesomeIcon icon={faStar} className="text-yellow-400 text-sm" />
-                    <FontAwesomeIcon icon={faStar} className="text-yellow-400 text-sm" />
-                    <FontAwesomeIcon icon={faStar} className="text-yellow-400 text-sm" />
-                    <FontAwesomeIcon icon={faStar} className="text-yellow-400 text-sm" />
-                    <FontAwesomeIcon icon={faStarRegular} className="text-slate-400 text-sm" />
+                    <StarRating rating={4} />
                     <span className="text-sm text-slate-500 ml-2">(5/5)</span>
                 </div>
                 <div className="flex items-center justify-between text-sm text-slate-500">
