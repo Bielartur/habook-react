@@ -1,12 +1,12 @@
 import {TitleConfig} from "../components/config/TitleConfig.tsx";
 import {FormContainer} from "../components/config/FormContainer.tsx";
-import {BasicInput} from "../components/shared/inputs/BasicInput.tsx";
 import {ButtonSave} from "../components/shared/buttons/ButtonSave.tsx";
-import {Lock} from "lucide-react";
 import {WrapperConfig} from "../components/config/WrapperConfig.tsx";
 import {ButtonGradient} from "../components/shared/buttons/ButtonGradient.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRefresh} from "@fortawesome/free-solid-svg-icons";
+import {Lock} from "lucide-react";
+import {PasswordInput} from "../components/shared/inputs/PasswordInput.tsx";
 
 
 export const SecurityPage = () => {
@@ -38,9 +38,9 @@ export const SecurityPage = () => {
             <TitleConfig title="Segurança" subtitle="Gerencie a segurança da sua conta"/>
             <WrapperConfig>
                 <FormContainer title="Alterar senha" subtitle="Atualize sua senha regularmente para maior segurança">
-                    <BasicInput label="Senha antiga" placeholder="Digite o sua senha atual"/>
-                    <BasicInput label="Senha nova" placeholder="Digite sua nova senha"/>
-                    <BasicInput label="Confirmação da nova senha" placeholder="Confirme sua nova senha"/>
+                    <PasswordInput label="Senha antiga" placeholder="Digite o sua senha atual"/>
+                    <PasswordInput label="Senha nova" placeholder="Digite sua nova senha"/>
+                    <PasswordInput label="Confirmação da nova senha" placeholder="Confirme sua nova senha"/>
                     <ButtonSave className="mt-3"/>
                 </FormContainer>
 
