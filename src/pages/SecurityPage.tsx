@@ -44,7 +44,7 @@ export const SecurityPage = () => {
                     <ButtonSave className="mt-3"/>
                 </FormContainer>
 
-                <FormContainer className="mt-3" title="Chave de acesso da API" subtitle="Atualizar chave de acesso">
+                <FormContainer title="Chave de acesso da API" subtitle="Atualizar chave de acesso">
                     <div className="py-6 px-2 pt-0 space-y-4 w-full">
                         <div className="p-4 bg-slate-100 rounded-lg">
                             <div className="flex items-center gap-3">

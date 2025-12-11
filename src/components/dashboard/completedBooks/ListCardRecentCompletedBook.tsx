@@ -63,8 +63,8 @@ export const ListCardRecentCompletedBooks = () => {
         <div className="w-full py-4 grid gap-4"
              style={{gridTemplateColumns: `repeat(auto-fill, minmax(16rem, 1fr))`}}
         >
-            {livrosConcluidos.map((item) => (
-                <CardRecentCompletedBook livro={item.livro} userbook={item.userbook}/>
+            {livrosConcluidos.map((item, index) => (
+                <CardRecentCompletedBook key={`recent-completed-book-${index}`} livro={item.livro} userbook={item.userbook}/>
             ))}
         </div>
     )

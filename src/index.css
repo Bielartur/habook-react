@@ -118,13 +118,6 @@
     @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
 }
 
-@utility gradient-border {
-    @apply relative rounded-md;
-    background: linear-gradient(to right, hsl(var(--card)));
-    background-clip: padding-box;
-    border: 1px solid transparent;
-}
-
 @utility text-gradient {
     @apply w-fit;
     background: linear-gradient(to left, hsl(var(--accent)), hsl(var(--purple-2)));
@@ -145,7 +138,7 @@
 @utility button-gradient {
     @apply flex items-center justify-center gap-1 space-x-2 px-4 py-2
     bg-linear-to-r from-accent to-accent-alt
-    text-white rounded-xl text-base
+    text-white rounded-xl text-base font-semibold
     whitespace-nowrap not-italic
     hover:brightness-110 hover:scale-102 transition
     duration-200 ease-out cursor-pointer
@@ -154,8 +147,8 @@
 }
 
 @utility simple-input {
-    @apply px-4 py-3 border border-slate-200 rounded-xl focus:ring-2
-    focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors;
+    @apply px-4 py-3 border border-slate-300 rounded-xl focus:ring-1
+    focus:ring-accent focus:border-accent outline-none transition-colors;
 }
 
 @utility input-form {
