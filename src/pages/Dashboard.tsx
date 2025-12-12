@@ -10,7 +10,7 @@ import {Subtitle} from "../components/shared/titles/Subtitle"
 import {ListCurrentBooks} from "../components/dashboard/currentBooks/ListCurrentBooks.tsx";
 import {ListCardRecentCompletedBooks} from "../components/dashboard/completedBooks/ListCardRecentCompletedBook.tsx";
 import {Link} from "react-router";
-import {AddBookModal} from "../components/dashboard/modals/AddBookModal.tsx";
+import {AddBookModal} from "../components/dashboard/modals/addBook/AddBookModal.tsx";
 
 
 export const Dashboard = () => {
@@ -23,8 +23,8 @@ export const Dashboard = () => {
                 <ListCardsDashboard/>
 
                 <CardContainer className="w-full">
-                    <TitleChart paginasLidas={234} metaMensal={300}/>
-                    <ProgressBarChart pctConcluida={80}/>
+                    <TitleChart paginasLidas={234} metaMensal={null}/>
+                    <ProgressBarChart pctConcluida={0}/>
                     <PagesPerDayChart/>
                 </CardContainer>
 

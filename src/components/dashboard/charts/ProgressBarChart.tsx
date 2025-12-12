@@ -1,7 +1,7 @@
 import {LineProgressBar} from "../../shared/LineProgressBar.tsx";
 
 type Props = {
-    pctConcluida?: number
+    pctConcluida?: number;
     pagsFaltantes?: number
     pagsFaltantesPorDia?: number
 }

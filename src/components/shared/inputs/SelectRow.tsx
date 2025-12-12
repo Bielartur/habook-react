@@ -24,7 +24,7 @@ export const SelectRow = () => {
                         type="button"
                         className={`
                             flex flex-grow items-center justify-center px-4 py-2 cursor-pointer text-sm
-                            ${selectedOption === option.value ? "bg-accent/90 text-slate-50" : "bg-slate-50 hover:bg-slate-50 text-slate-600"}
+                            ${selectedOption === option.value ? "bg-accent text-slate-50" : "bg-slate-50 hover:bg-slate-50 text-slate-600"}
                         `}
                         onClick={() => {setSelectedOption(option.value)}}
                     >

@@ -2,10 +2,11 @@ import { faCalendar } from "@fortawesome/free-regular-svg-icons"
 import { faBullseye, faPlus, faSquarePollVertical } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { ButtonGradient } from "../../shared/buttons/ButtonGradient"
+import {SetGoalsModal} from "../modals/setGoals/SetGoalsModal.tsx";
 
 type Props = {
-    metaMensal?: number | undefined
-    paginasLidas?: number | undefined
+    metaMensal?: number | undefined | null
+    paginasLidas?: number | undefined | null
     mesGrafico?: string
     anoGrafico?: number
 }
@@ -48,10 +49,12 @@ export const TitleChart = ({
                             <FontAwesomeIcon icon={faSquarePollVertical} />
                             <span>Defina seu objetivo</span>
                         </p>
-                        <ButtonGradient className="py-1 px-2.5 text-sm">
-                            <FontAwesomeIcon icon={faPlus} />
-                            Definir meta
-                        </ButtonGradient>
+                        <SetGoalsModal trigger={(
+                            <ButtonGradient className="py-1 px-2.5 text-sm">
+                                <FontAwesomeIcon icon={faPlus} />
+                                Definir meta
+                            </ButtonGradient>
+                        )} />
                     </>
                 )
                 }

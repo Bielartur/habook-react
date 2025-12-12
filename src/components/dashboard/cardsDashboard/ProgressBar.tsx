@@ -3,12 +3,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {LineProgressBar} from "../../shared/LineProgressBar.tsx";
 
 type Props = {
-    pctConcluida?: number | undefined
+    pctConcluida?: number | undefined | null
 }
 
 export const ProgressBar = ({pctConcluida}: Props) => {
 
-    if (pctConcluida === undefined) {
+    if (pctConcluida === undefined || pctConcluida === null) {
         return (
             <div className="w-full text-accent-alt text-sm">
                 <FontAwesomeIcon icon={faFaceSadCry}/>
