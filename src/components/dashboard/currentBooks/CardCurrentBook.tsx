@@ -1,10 +1,11 @@
 import {CardContainer} from "../../shared/containers/CardContainer.tsx";
 import {faClock} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Pen} from "lucide-react";
 import {LineProgressBar} from "../../shared/LineProgressBar.tsx";
 import {ButtonAddPage} from "../../shared/buttons/ButtonAddPage.tsx";
 import {truncate} from "../../../utils/truncateStrings.ts";
+import {FormEditPages} from "./FormEditPages.tsx";
+
 
 type Props = {
     livro: {
@@ -23,10 +24,12 @@ type Props = {
     }
 }
 
-export const CardCurrentBook = ({ livro, userbook}: Props) => {
+export const CardCurrentBook = ({livro, userbook}: Props) => {
 
     const {titulo, autor, capaUrl, totalPaginas} = livro;
-    const {diasEmLeitura, paginaAtual, pctProgresso, paginasFaltantes, pctFaltante} = userbook;
+    const {diasEmLeitura, pctProgresso, paginaAtual, paginasFaltantes, pctFaltante} = userbook;
+
+    // const [paginaAtual, setPaginaAtual] = useState(userbook.paginaAtual);
 
     return (
         <CardContainer key={`livro-${livro.id}`}>
@@ -55,20 +58,8 @@ export const CardCurrentBook = ({ livro, userbook}: Props) => {
 
             <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2">
-                        <span className="text-lg font-bold text-slate-700">{paginaAtual}</span>
 
-                        <span className="text-sm text-slate-500">
-                            / {totalPaginas} páginas
-                        </span>
-
-                        <button
-                            className="p-1 text-slate-400 hover:text-slate-600 transition-colors disabled:opacity-60 disabled:"
-                            title="Editar página atual"
-                        >
-                            <Pen size="18" className="cursor-pointer"/>
-                        </button>
-                    </div>
+                    <FormEditPages paginaAtual={paginaAtual} totalPaginas={totalPaginas} />
 
                     <span className="text-sm font-medium text-accent">
                         {pctProgresso}%
@@ -84,9 +75,9 @@ export const CardCurrentBook = ({ livro, userbook}: Props) => {
 
                 <div className="flex items-center space-x-2 pt-2 border-t border-slate-100">
                     <span className="text-xs text-slate-500">Adicionar: </span>
-                    <ButtonAddPage qtdPages={5} />
-                    <ButtonAddPage qtdPages={10} />
-                    <ButtonAddPage qtdPages={25} />
+                    <ButtonAddPage qtdPages={5}/>
+                    <ButtonAddPage qtdPages={10}/>
+                    <ButtonAddPage qtdPages={25}/>
                 </div>
             </div>
         </CardContainer>
