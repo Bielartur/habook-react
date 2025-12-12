@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 type Props = {
     text: string;
     faIcon?: IconProp;
-    required: boolean;
+    required?: boolean;
 }
 
 export const Label = ({ text, faIcon, required}: Props) => {

@@ -1,6 +1,6 @@
 import { CardContainer } from "../../shared/containers/CardContainer"
 
-type Props = {
+type Props = React.HTMLAttributes<HTMLDivElement> & {
     infoCard: {
         label: string
         icon: React.ReactNode
@@ -10,13 +10,12 @@ type Props = {
         textColor: string
         complemento?: React.ReactNode
     }
-    key?: string | number
     children?: React.ReactNode
 }
 
-export const CardDashboard = ({ infoCard, key, children }: Props) => {
+export const CardDashboard = ({ infoCard, children, ...props }: Props) => {
     return (
-        <CardContainer key={key}>
+        <CardContainer {...props}>
             <div className="w-full flex justify-between items-center">
                 <div className={`py-2 px-3 ${infoCard.bgColor} w-fit rounded-lg ${infoCard.textColor} text-xl`}>
                     {infoCard.icon}

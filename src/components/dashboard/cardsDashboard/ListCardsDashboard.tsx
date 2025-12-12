@@ -16,7 +16,7 @@ const infoCards = [
     descricao_qtd: "páginas lidas",
     bgColor: "bg-indigo-100",
     textColor: "text-accent-alt",
-    complemento: <ProgressBar pctConcluida={80} />
+    complemento: <ProgressBar pctConcluida={null} />
   },
   {
     label: "Sequência",

@@ -1,13 +1,13 @@
 // CreateBookForm.tsx
-import { BasicInput } from "../../shared/inputs/BasicInput";
+import { BasicInput } from "../../../shared/inputs/BasicInput.tsx";
 import {
     faBook,
     faHashtag,
     faLayerGroup,
-    faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { SelectOptions } from "../../shared/inputs/SelectOptions";
-import type {BookFormValues, FieldLocks} from "../../../api/types.ts";
+import {faUser} from "@fortawesome/free-regular-svg-icons";
+import { SelectOptions } from "../../../shared/inputs/SelectOptions.tsx";
+import type {BookFormValues, FieldLocks} from "../../../../api/types.ts";
 
 
 const options = [
