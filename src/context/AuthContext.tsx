@@ -1,0 +1,13 @@
+import { createContext } from "react";
+import type {User} from "../models/Auth.ts";
+
+export type AuthContextValue = {
+    isLogged: boolean;
+    setIsLogged: (isLogged: boolean) => void;
+    userData: User | null;
+    setUserData: (userData: User) => void;
+    handleSignIn: (email: string, password: string) => void;
+    loading: boolean;
+};
+
+export const AuthContext = createContext<AuthContextValue | null>(null);

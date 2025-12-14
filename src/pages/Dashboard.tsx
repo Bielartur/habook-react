@@ -11,9 +11,22 @@ import {ListCurrentBooks} from "../components/dashboard/currentBooks/ListCurrent
 import {ListCardRecentCompletedBooks} from "../components/dashboard/completedBooks/ListCardRecentCompletedBook.tsx";
 import {Link} from "react-router";
 import {AddBookModal} from "../components/dashboard/modals/addBook/AddBookModal.tsx";
+import {useEffect} from "react";
+import {useRequests} from "../hooks/useRequests.ts";
 
 
-export const Dashboard = () => {
+export const Dashboard = () => {7
+    const { getUserBooks } = useRequests()
+
+    useEffect(() => {
+        const loadBooks = async () => {
+            const books = await getUserBooks()
+            console.log(books)
+        }
+
+        loadBooks();
+    }, [])
+
     return (
         <>
             <Section>

@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-regular-svg-icons";
 import { SelectOptions } from "../../../shared/inputs/SelectOptions.tsx";
-import type {BookFormValues, FieldLocks} from "../../../../api/types.ts";
+import type {BookFormValues, FieldLocks} from "../../../../models/GoogleApi.ts";
 
 
 const options = [

@@ -1,4 +1,4 @@
-import type {BookResult} from "./types.ts";
+import type {BookResult} from "../../models/GoogleApi.ts";
 
 export async function searchBooksApi(
     q: string,
