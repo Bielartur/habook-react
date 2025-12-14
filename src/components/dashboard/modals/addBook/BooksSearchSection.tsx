@@ -2,8 +2,8 @@
 import {useEffect, useRef, useState} from "react";
 import {CreateBookForm} from "./CreateBookForm.tsx";
 
-import type {BookResult, BookFormValues, FieldLocks} from "../../../../api/types.ts";
-import {searchBooksApi} from "../../../../api/searchBooksAPI.ts";
+import type {BookResult, BookFormValues, FieldLocks} from "../../../../models/GoogleApi.ts";
+import {searchBooksApi} from "../../../../utils/GoogleApi/searchBooksAPI.ts";
 import {SearchInputGradient} from "../../../shared/inputs/SearchInputGradient.tsx";
 
 const MIN_CHARS = 1;
