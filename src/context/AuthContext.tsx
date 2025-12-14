@@ -7,6 +7,7 @@ export type AuthContextValue = {
     userData: User | null;
     setUserData: (userData: User) => void;
     handleSignIn: (email: string, password: string) => void;
+    handleLogout: () => void;
     loading: boolean;
 };
 

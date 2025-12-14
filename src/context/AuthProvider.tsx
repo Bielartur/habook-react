@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const AuthProvider = ({ children }: Props) => {
-    const { login, getUser, refreshToken } = useRequests();
+    const { login, logout, getUser, refreshToken } = useRequests();
 
     const [isLogged, setIsLogged] = useState(false);
     const [userData, setUserData] = useState<User | null>(null);
@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }: Props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    async function handleInitUser() {
+    const handleInitUser = async () => {
         const token = getAccessToken();
 
         const resetAuth = () => {
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }: Props) => {
         }
     }
 
-    async function handleSignIn(email: string, password: string) {
+    const handleSignIn = async (email: string, password: string) => {
         const resp = await login({ email, password });
 
         if (!resp.success) {
@@ -117,6 +117,20 @@ export const AuthProvider = ({ children }: Props) => {
         return resp; // ApiSuccess<TokenOutput>
     }
 
+    const handleLogout = async () => {
+        const resp = await logout();
+
+        if (!resp.success) {
+            return resp; // ApiError
+        }
+
+        setIsLogged(false);
+        setUserData(null);
+        setLoading(false);
+
+        return resp; // ApiSuccess<unknown>
+    }
+
 
     const value: AuthContextValue = {
         isLogged,
@@ -124,6 +138,7 @@ export const AuthProvider = ({ children }: Props) => {
         userData,
         setUserData,
         handleSignIn,
+        handleLogout,
         loading,
     };
 

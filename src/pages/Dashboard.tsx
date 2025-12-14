@@ -25,7 +25,7 @@ export const Dashboard = () => {7
         }
 
         loadBooks();
-    }, [])
+    }, [getUserBooks])
 
     return (
         <>

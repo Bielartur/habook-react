@@ -9,7 +9,7 @@ import {Lock} from "lucide-react";
 import {PasswordInput} from "../components/shared/inputs/PasswordInput.tsx";
 
 
-export const SecurityPage = () => {
+export const SecurityConfig = () => {
     const hasToken = true
 
     const textToken = hasToken ? (

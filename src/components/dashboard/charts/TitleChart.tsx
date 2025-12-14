@@ -51,8 +51,8 @@ export const TitleChart = ({
                         </p>
                         <SetGoalsModal trigger={(
                             <ButtonGradient className="py-1 px-2.5 text-sm">
-                                <FontAwesomeIcon icon={faPlus} />
-                                Definir meta
+                                <FontAwesomeIcon icon={faPlus} className="m-0" />
+                                <span className="leading-5">Definir meta</span>
                             </ButtonGradient>
                         )} />
                     </>

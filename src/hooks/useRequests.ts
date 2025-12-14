@@ -17,6 +17,10 @@ const refreshToken = async () => {
     return await apiRequest<TokenOutput>("auth/refresh", "POST", undefined, true);
 };
 
+const logout = async () => {
+    return await apiRequest("auth/logout", "POST", {}, true);
+};
+
 const getUser = async () => {
     return await apiRequest<User>("me/", "GET", undefined, true);
 };
@@ -36,6 +40,7 @@ export const useRequests = () => ({
     login,
     cadastrar,
     refreshToken,
+    logout,
     getUser,
 
     getBooks,
