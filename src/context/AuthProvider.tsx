@@ -2,14 +2,14 @@ import {useEffect, useState} from "react";
 import { AuthContext, type AuthContextValue } from "./AuthContext.tsx";
 import {useRequests} from "../hooks/useRequests.ts";
 import {clearAccessToken, getAccessToken, setAccessToken} from "../utils/HelpersToken.ts";
-import type {ApiResponse, TokenOutput, User} from "../models/Auth.ts";
+import type {ApiResponse, User} from "../models/Auth.ts";
 
 type Props = {
     children: React.ReactNode;
 };
 
 export const AuthProvider = ({ children }: Props) => {
-    const { login, logout, getUser, refreshToken } = useRequests();
+    const { login, logout, getUser } = useRequests();
 
     const [isLogged, setIsLogged] = useState(false);
     const [userData, setUserData] = useState<User | null>(null);
@@ -29,54 +29,25 @@ export const AuthProvider = ({ children }: Props) => {
             setUserData(null);
         };
 
-        const finish = () => setLoading(false);
-
-        const fetchMe = () => getUser() as Promise<ApiResponse<User>>;
-
-        const isTokenNotValid = (resp: ApiResponse<User>) =>
-            !resp.success && (resp as any)?.code === "token_not_valid";
-
         try {
             if (!token) {
                 resetAuth();
-                finish();
                 return;
             }
 
-            // 1) tenta buscar o usuário
-            let me = await fetchMe();
+            const me = (await getUser()) as ApiResponse<User>; // já faz refresh+retry internamente
 
-            // 2) se token inválido, tenta refresh 1x e refaz /me
-            if (isTokenNotValid(me)) {
-                const refreshed = (await refreshToken()) as ApiResponse<TokenOutput>;
-
-                if (!refreshed.success || !refreshed.payload?.access) {
-                    resetAuth();
-                    finish();
-                    return;
-                }
-
-                setAccessToken(refreshed.payload.access);
-                me = await fetchMe();
-            }
-
-            // 3) falhou mesmo depois do refresh (ou falhou direto)
             if (!me.success || !me.payload) {
                 resetAuth();
-                finish();
                 return;
             }
 
-            // 4) sucesso
             setUserData(me.payload);
             setIsLogged(true);
-            finish();
-        } catch {
-            // fallback seguro para qualquer exceção inesperada
-            resetAuth();
-            finish();
+        } finally {
+            setLoading(false);
         }
-    }
+    };
 
     const handleSignIn = async (email: string, password: string) => {
         const resp = await login({ email, password });

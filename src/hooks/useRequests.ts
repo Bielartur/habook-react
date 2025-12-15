@@ -26,7 +26,7 @@ const getUser = async () => {
 };
 
 const getBooks = async () => {
-    return await apiRequest<Book[]>("books/", "GET");
+    return await apiRequest<Array<Book>>("books/", "GET");
 }
 
 const getUserBooks = async () => {

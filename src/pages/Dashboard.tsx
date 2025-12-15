@@ -15,17 +15,17 @@ import {useEffect} from "react";
 import {useRequests} from "../hooks/useRequests.ts";
 
 
-export const Dashboard = () => {7
-    const { getUserBooks } = useRequests()
+export const Dashboard = () => {
+    const { getBooks } = useRequests()
 
     useEffect(() => {
         const loadBooks = async () => {
-            const books = await getUserBooks()
+            const books = await getBooks()
             console.log(books)
         }
 
         loadBooks();
-    }, [getUserBooks])
+    }, [getBooks])
 
     return (
         <>

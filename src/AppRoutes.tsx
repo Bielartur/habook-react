@@ -6,6 +6,9 @@ import {UserConfig} from "./pages/UserConfig.tsx";
 import {ConfigLayout} from "./layout/ConfigLayout.tsx";
 import {GoalsConfig} from "./pages/GoalsConfig.tsx";
 import {SecurityConfig} from "./pages/SecurityConfig.tsx";
+import {AuthLayout} from "./layout/AuthLayout.tsx";
+import {LoginPage} from "./pages/LoginPage.tsx";
+import {RegisterPage} from "./pages/RegisterPage.tsx";
 
 
 export const AppRoutes = () => {
@@ -20,6 +23,11 @@ export const AppRoutes = () => {
                 <Route path="configuracoes/" element={<UserConfig/>}/>
                 <Route path="metas/" element={<GoalsConfig/>}/>
                 <Route path="seguranca/" element={<SecurityConfig/>}/>
+            </Route>
+
+            <Route path="/conta" element={<AuthLayout />}>
+                <Route path="login/" element={<LoginPage />}/>
+                <Route path="cadastrar/" element={<RegisterPage />}/>
             </Route>
         </Routes>
     )
