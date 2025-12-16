@@ -18,6 +18,11 @@ function normalizeAxiosError(error: unknown): ApiError {
             return data as ApiError;
         }
 
+        if (data && data.code === "token_not_valid") {
+            return data;
+        }
+
+
         // Erro HTTP fora do contrato
         return {
             success: false,
@@ -67,6 +72,7 @@ export async function apiRequest<T>(
         // se backend respondeu 200 mas com code token_not_valid (acontece em alguns setups)
         if (isTokenNotValid(res1.data)) {
             const newToken = await refreshAccessToken(BASE_URL);
+            console.log("Novo token: " +newToken);
 
             if (!newToken) {
                 clearAccessToken();
@@ -85,7 +91,10 @@ export async function apiRequest<T>(
 
         // 2) se veio como erro HTTP e normalize identificou token inválido,
         // tenta refresh 1x e repete
-        if ((apiErr as any)?.code === "token_not_valid" && withAuth) {
+        if (
+            ((apiErr as any)?.code === "token_not_valid" || apiErr.message == "Unauthorized")
+            && withAuth
+        ) {
             const newToken = await refreshAccessToken(BASE_URL);
 
             if (!newToken) {

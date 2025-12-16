@@ -16,16 +16,16 @@ import {useRequests} from "../hooks/useRequests.ts";
 
 
 export const Dashboard = () => {
-    const { getBooks } = useRequests()
+    const { getUserBooks } = useRequests()
 
     useEffect(() => {
         const loadBooks = async () => {
-            const books = await getBooks()
+            const books = await getUserBooks()
             console.log(books)
         }
 
         loadBooks();
-    }, [getBooks])
+    }, [getUserBooks])
 
     return (
         <>

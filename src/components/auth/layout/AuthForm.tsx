@@ -1,20 +1,14 @@
-import {AuthInput} from "../../shared/inputs/AuthInput.tsx";
 import {ButtonAuth} from "../../shared/buttons/ButtonAuth.tsx";
-import {RememberMe} from "../login/RememberMe.tsx";
 
 type Props = React.FormHTMLAttributes<HTMLFormElement> & {
     title: string
     subtitle: string
     submitLabel?: string
-    formFields: Array<{
-        label: string
-        name: string
-        type?: string
-    }>
-    rememberMe?: boolean
+    isSubmiting: boolean
+    children?: React.ReactNode
 }
 
-export const AuthForm = ({title, subtitle, submitLabel = "Enviar", rememberMe, formFields, ...props}: Props) => {
+export const AuthForm = ({title, subtitle, submitLabel = "Enviar", isSubmiting, children, ...props}: Props) => {
 
     return (
         <form className="w-full flex flex-col justify-center gap-3 lg:gap-4.5" {...props}>
@@ -25,23 +19,12 @@ export const AuthForm = ({title, subtitle, submitLabel = "Enviar", rememberMe, f
                 <p className="text-sm font-semibold">{subtitle}</p>
             </legend>
 
-            <div className="flex flex-col gap-3">
-                {formFields.map((field) => (
-                    <AuthInput
-                        key={`form-input-${field.name}`}
-                        label={field.label}
-                        inputName={field.name}
-                        type={field.type}
-                        autoComplete={field.type === "email" ? "email" : undefined}
-                    />
-                ))}
-                {rememberMe && (
-                    <RememberMe inputName="remember_me" label="Lembrar de mim"/>
-                )}
+            <div className="flex flex-col gap-3 max-w-96 w-full mx-auto">
+                { children }
             </div>
 
 
-            <ButtonAuth type="submit">
+            <ButtonAuth type="submit" disabled={isSubmiting}>
                 {submitLabel}
             </ButtonAuth>
         </form>

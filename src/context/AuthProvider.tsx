@@ -95,6 +95,7 @@ export const AuthProvider = ({ children }: Props) => {
             return resp; // ApiError
         }
 
+        clearAccessToken();
         setIsLogged(false);
         setUserData(null);
         setLoading(false);

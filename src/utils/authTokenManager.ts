@@ -17,7 +17,7 @@ function isTokenNotValid(resp: unknown): boolean {
 export async function refreshAccessToken(BASE_URL: string): Promise<string | null> {
     if (!refreshPromise) {
         refreshPromise = axios
-            .post<ApiResponse<TokenOutput>>(`${BASE_URL}/auth/refresh/`, {}, { withCredentials: true })
+            .post<ApiResponse<TokenOutput>>(`${BASE_URL}/auth/refresh`, {}, { withCredentials: true })
             .then((res) => {
                 const data = res.data;
                 if (data.success && data.payload?.access) return data.payload.access;

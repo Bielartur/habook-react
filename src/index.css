@@ -87,7 +87,7 @@
     }
 
     body {
-        @apply relative pb-6 min-h-screen h-screen bg-background overflow-x-hidden text-foreground transition-colors duration-300;
+        @apply relative pb-6 min-h-screen bg-background overflow-x-hidden text-foreground transition-colors duration-300;
         font-feature-settings: "rlig" 1 "calt" 1;
     }
 

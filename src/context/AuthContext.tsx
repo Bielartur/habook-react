@@ -1,12 +1,12 @@
 import { createContext } from "react";
-import type {User} from "../models/Auth.ts";
+import type {ApiResponse, TokenOutput, User} from "../models/Auth.ts";
 
 export type AuthContextValue = {
     isLogged: boolean;
     setIsLogged: (isLogged: boolean) => void;
     userData: User | null;
     setUserData: (userData: User) => void;
-    handleSignIn: (email: string, password: string) => void;
+    handleSignIn: (email: string, password: string) => Promise<ApiResponse<TokenOutput>>;
     handleLogout: () => void;
     loading: boolean;
 };
