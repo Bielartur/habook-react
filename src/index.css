@@ -82,9 +82,18 @@
         @apply scroll-smooth;
     }
 
+    p {
+        @apply text-slate-600;
+    }
+
     body {
         @apply relative pb-6 min-h-screen bg-background overflow-x-hidden text-foreground transition-colors duration-300;
         font-feature-settings: "rlig" 1 "calt" 1;
+    }
+
+    body.auth-body {
+        @apply text-slate-600 bg-no-repeat;
+        background: linear-gradient(to bottom, hsl(var(--purple)) 0%, hsl(var(--purple-2)) 100%);
     }
 }
 
@@ -107,11 +116,6 @@
     @media (width >= 1400px) {
         max-width: 1400px;
     }
-}
-
-@utility text-glow {
-    @apply relative;
-    text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
 }
 
 @utility card-hover {
@@ -152,6 +156,12 @@
     transition-all duration-200 cursor-pointer;
 }
 
+@utility button-auth {
+    @apply flex items-center justify-center w-full p-2.5 bg-linear-to-r from-purple to-purple-2 text-white
+    rounded-sm hover:shadow-lg hover:scale-102 active:scale-96 disabled:from-slate-600 disabled:to-slate-500
+    transition-transform duration-200 cursor-pointer;
+}
+
 @utility simple-input {
     @apply px-4 py-3 border border-slate-300 rounded-xl focus:ring-1
     focus:ring-accent focus:border-accent outline-none transition-colors;
@@ -161,6 +171,16 @@
     @apply w-full px-3 py-2 border border-slate-400 rounded-xl focus:ring-accent
     focus:border-accent outline-accent transition-colors
     bg-slate-100 text-slate-600 placeholder:text-slate-400;
+}
+
+@utility float-label {
+    @apply pointer-events-none absolute left-2 -top-3 ml-4 px-1 leading-4 bg-white
+    text-sm text-slate-600 transition-all duration-200
+    peer-[&:placeholder-shown:not(:focus)]:top-1/2
+    peer-[&:placeholder-shown:not(:focus)]:-translate-y-1/2
+    peer-[&:placeholder-shown:not(:focus)]:text-base
+    peer-[&:placeholder-shown:not(:focus)]:text-slate-500
+    peer-[&:placeholder-shown:not(:focus)]:translate-x-2;
 }
 
 #root {

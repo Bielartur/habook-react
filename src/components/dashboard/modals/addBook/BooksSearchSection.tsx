@@ -137,6 +137,14 @@ export const BookSearchSection = () => {
     function handleClearSelection() {
         setSelectedBook(null);
         setSearchLocked(false);
+        setFormValues({
+            title: "",
+            author: "",
+            totalPages: "",
+            isbn: "",
+            cover: "",
+            googleId: "",
+        })
         setResults([]);
         setStatus("idle");
         // NOTE: não limpo formValues, igual ao script original

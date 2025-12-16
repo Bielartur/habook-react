@@ -47,6 +47,7 @@ export type ApiResponse<T> = ApiSuccess<T> | ApiError;
 export type ApiLogin = {
     email: string;
     password: string;
+    remember_me?: boolean;
 }
 
 export type ApiRegister = {

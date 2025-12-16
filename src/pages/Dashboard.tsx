@@ -15,7 +15,7 @@ import {useEffect} from "react";
 import {useRequests} from "../hooks/useRequests.ts";
 
 
-export const Dashboard = () => {7
+export const Dashboard = () => {
     const { getUserBooks } = useRequests()
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export const Dashboard = () => {7
         }
 
         loadBooks();
-    }, [])
+    }, [getUserBooks])
 
     return (
         <>

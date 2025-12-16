@@ -5,8 +5,8 @@ import type {Book} from "../models/Books.ts";
 import type {UserLivro} from "../models/UserBooks.ts";
 
 // Authentication
-const login = async ({ email, password }: ApiLogin) => {
-    return await apiRequest<TokenOutput>("auth/login", "POST", { email, password }, false);
+const login = async ({ email, password, remember_me }: ApiLogin) => {
+    return await apiRequest<TokenOutput>("auth/login", "POST", { email, password, remember_me }, false);
 };
 
 const cadastrar = async ({ name, email, password, confirm_password }: ApiRegister) => {
@@ -17,12 +17,16 @@ const refreshToken = async () => {
     return await apiRequest<TokenOutput>("auth/refresh", "POST", undefined, true);
 };
 
+const logout = async () => {
+    return await apiRequest("auth/logout", "POST", {}, true);
+};
+
 const getUser = async () => {
     return await apiRequest<User>("me/", "GET", undefined, true);
 };
 
 const getBooks = async () => {
-    return await apiRequest<Book[]>("books/", "GET");
+    return await apiRequest<Array<Book>>("books/", "GET");
 }
 
 const getUserBooks = async () => {
@@ -36,6 +40,7 @@ export const useRequests = () => ({
     login,
     cadastrar,
     refreshToken,
+    logout,
     getUser,
 
     getBooks,
