@@ -2,7 +2,31 @@
 import {apiRequest} from "../utils/apiRequest.ts";
 import type {ApiLogin, ApiRegister, TokenOutput, User} from "../models/Auth.ts";
 import type {Book} from "../models/Books.ts";
-import type {UserLivro} from "../models/UserBooks.ts";
+import type {GetUserBooksParams, UserLivro} from "../models/UserBooks.ts";
+import type {DashboardType} from "../models/Statistics.ts";
+
+type QueryPrimitive = string | number | boolean;
+type QueryValue = QueryPrimitive | QueryPrimitive[] | undefined;
+
+export const buildQueryString = <T extends object>(params?: T): string => {
+    if (!params) return "";
+
+    const query = new URLSearchParams();
+
+    for (const [key, value] of Object.entries(params as Record<string, QueryValue>)) {
+        if (value === undefined || value === null) continue;
+
+        if (Array.isArray(value)) {
+            value.forEach((v) => query.append(key, String(v)));
+        } else {
+            query.append(key, String(value));
+        }
+    }
+
+    return query.toString();
+};
+
+
 
 // Authentication
 const login = async ({ email, password, remember_me }: ApiLogin) => {
@@ -25,13 +49,28 @@ const getUser = async () => {
     return await apiRequest<User>("me/", "GET", undefined, true);
 };
 
+const getDashboard = async () => {
+    return await apiRequest<DashboardType>("me/dashboard", "GET", undefined, true);
+};
+
 const getBooks = async () => {
     return await apiRequest<Array<Book>>("books/", "GET");
 }
 
-const getUserBooks = async () => {
-    return await apiRequest<UserLivro>("me/books/progress", "GET", undefined, true);
-}
+const getUserBooks = async (params?: GetUserBooksParams) => {
+    const query = buildQueryString(params);
+
+    const url = query
+        ? `me/books/progress?${query}`
+        : "me/books/progress";
+
+    return apiRequest<UserLivro[]>(
+        url,
+        "GET",
+        undefined,
+        true
+    );
+};
 
 
 // Exportando todas as requests
@@ -43,6 +82,7 @@ export const useRequests = () => ({
     logout,
     getUser,
 
+    getDashboard,
     getBooks,
     getUserBooks,
 });

@@ -38,3 +38,12 @@ export interface UserLivro {
     progresso: Progresso;
 }
 
+export interface GetUserBooksParams {
+    status?: "em_andamento" | "concluidos" | "abandonados";
+    q?: string; // Busca por título ou por autor
+    categoria_id?: number;
+    autor?: string;
+    min_paginas?: number;
+    max_paginas?: number;
+    ids?: Array<number>;
+}

@@ -11,21 +11,29 @@ import {ListCurrentBooks} from "../components/dashboard/currentBooks/ListCurrent
 import {ListCardRecentCompletedBooks} from "../components/dashboard/completedBooks/ListCardRecentCompletedBook.tsx";
 import {Link} from "react-router";
 import {AddBookModal} from "../components/dashboard/modals/addBook/AddBookModal.tsx";
-import {useEffect} from "react";
 import {useRequests} from "../hooks/useRequests.ts";
+import {useEffect, useState} from "react";
+import toast from "react-hot-toast";
+import type {DashboardType} from "../models/Statistics.ts";
 
 
 export const Dashboard = () => {
-    const { getUserBooks } = useRequests()
+    const { getDashboard } = useRequests()
+    const [dashboardData, setDashboardData] = useState<DashboardType | null>()
 
     useEffect(() => {
-        const loadBooks = async () => {
-            const books = await getUserBooks()
-            console.log(books)
+        const loadDashboard = async () => {
+            const response = await getDashboard();
+
+            if (response.success) {
+                toast.success(response.message)
+                setDashboardData(response.payload)
+                console.log(response.payload)
+            }
         }
 
-        loadBooks();
-    }, [getUserBooks])
+        loadDashboard()
+    }, [])
 
     return (
         <>
@@ -33,12 +41,17 @@ export const Dashboard = () => {
                 <PageTitle title="Sua Jornada de Leitura"
                            subtitle="Acompanhe seu progresso, mantenha a consistência e alcance suas metas de leitura"/>
 
-                <ListCardsDashboard/>
+                <ListCardsDashboard
+                    paginasLidas={dashboardData?.lidas}
+                    diasConsecutivos={dashboardData?.streak}
+                    qtdLivrosAndamento={dashboardData?.qtd_livros_ativos}
+                    pctConcluida={dashboardData?.pct}
+                />
 
                 <CardContainer className="w-full">
-                    <TitleChart paginasLidas={234} metaMensal={null}/>
-                    <ProgressBarChart pctConcluida={0}/>
-                    <PagesPerDayChart/>
+                    <TitleChart paginasLidas={dashboardData?.lidas} metaMensal={dashboardData?.meta}/>
+                    <ProgressBarChart pctConcluida={dashboardData?.pct}/>
+                    <PagesPerDayChart diario={dashboardData?.diario}/>
                 </CardContainer>
 
             </Section>

@@ -3,31 +3,21 @@ import {faClock} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {LineProgressBar} from "../../shared/LineProgressBar.tsx";
 import {ButtonAddPage} from "../../shared/buttons/ButtonAddPage.tsx";
-import {truncate} from "../../../utils/truncateStrings.ts";
+import {truncate} from "../../../utils/globalHelpers.ts";
 import {FormEditPages} from "./FormEditPages.tsx";
+import type {LivroResumo, Progresso} from "../../../models/UserBooks.ts";
 
 
 type Props = {
-    livro: {
-        id: number
-        titulo: string
-        autor: string
-        capaUrl: string
-        totalPaginas: number
-    }
-    userbook: {
-        diasEmLeitura: number
-        paginaAtual: number
-        pctProgresso: number
-        paginasFaltantes: number
-        pctFaltante: number
-    }
+    livro: LivroResumo
+    progresso: Progresso
 }
 
-export const CardCurrentBook = ({livro, userbook}: Props) => {
+export const CardCurrentBook = ({livro, progresso}: Props) => {
 
-    const {titulo, autor, capaUrl, totalPaginas} = livro;
-    const {diasEmLeitura, pctProgresso, paginaAtual, paginasFaltantes, pctFaltante} = userbook;
+    const {titulo, autor, capa_url, total_paginas} = livro;
+    const {dias_em_leitura, progresso_percentual, pagina_atual, paginas_restantes} = progresso;
+    const percentualRestante = 100 - progresso_percentual;
 
     // const [paginaAtual, setPaginaAtual] = useState(userbook.paginaAtual);
 
@@ -36,7 +26,7 @@ export const CardCurrentBook = ({livro, userbook}: Props) => {
             <div className="flex items-start space-x-4 mb-4">
                 <div className="relative">
                     <img
-                        src={capaUrl}
+                        src={capa_url ? capa_url : "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=400" }
                         alt={`Capa de ${titulo}`}
                         className="w-16 h-20 object-cover rounded-lg shadow-md group-hover:scale-105 transition-transform duration-300"
                     />
@@ -49,9 +39,9 @@ export const CardCurrentBook = ({livro, userbook}: Props) => {
                     <div className="flex items-center space-x-4 text-xs text-slate-500">
                         <div className="flex items-center space-x-1">
                             <FontAwesomeIcon icon={faClock}/>
-                            <span>{diasEmLeitura} dias</span>
+                            <span>{dias_em_leitura} dias</span>
                         </div>
-                        <span>{totalPaginas} páginas</span>
+                        <span>{total_paginas} páginas</span>
                     </div>
                 </div>
             </div>
@@ -59,18 +49,18 @@ export const CardCurrentBook = ({livro, userbook}: Props) => {
             <div className="space-y-4">
                 <div className="flex items-center justify-between">
 
-                    <FormEditPages paginaAtual={paginaAtual} totalPaginas={totalPaginas} />
+                    <FormEditPages paginaAtual={pagina_atual} totalPaginas={total_paginas} />
 
                     <span className="text-sm font-medium text-accent">
-                        {pctProgresso}%
+                        {progresso_percentual}%
                 </span>
                 </div>
 
-                <LineProgressBar porcentagem={pctProgresso}/>
+                <LineProgressBar porcentagem={progresso_percentual}/>
 
                 <div className="flex items-center justify-between text-xs text-slate-500">
-                    <span>Restam <span>{paginasFaltantes}</span> páginas</span>
-                    <span>{pctFaltante}% restante</span>
+                    <span>Restam <span>{paginas_restantes}</span> páginas</span>
+                    <span>{percentualRestante}% restante</span>
                 </div>
 
                 <div className="flex items-center space-x-2 pt-2 border-t border-slate-100">
