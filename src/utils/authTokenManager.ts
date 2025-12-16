@@ -29,6 +29,8 @@ export async function refreshAccessToken(BASE_URL: string): Promise<string | nul
             });
     }
 
+    console.log("refreshAccessToken", refreshPromise);
+
     return refreshPromise;
 }
 

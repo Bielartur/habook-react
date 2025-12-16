@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
 import { AuthContext, type AuthContextValue } from "./AuthContext.tsx";
 import {useRequests} from "../hooks/useRequests.ts";
-import {clearAccessToken, getAccessToken, setAccessToken} from "../utils/HelpersToken.ts";
+import {clearAccessToken, setAccessToken} from "../utils/HelpersToken.ts";
 import type {ApiResponse, User} from "../models/Auth.ts";
+import toast from "react-hot-toast";
 
 type Props = {
     children: React.ReactNode;
@@ -21,8 +22,6 @@ export const AuthProvider = ({ children }: Props) => {
     }, []);
 
     const handleInitUser = async () => {
-        const token = getAccessToken();
-
         const resetAuth = () => {
             clearAccessToken();
             setIsLogged(false);
@@ -30,11 +29,6 @@ export const AuthProvider = ({ children }: Props) => {
         };
 
         try {
-            if (!token) {
-                resetAuth();
-                return;
-            }
-
             const me = (await getUser()) as ApiResponse<User>; // já faz refresh+retry internamente
 
             if (!me.success || !me.payload) {
@@ -99,6 +93,7 @@ export const AuthProvider = ({ children }: Props) => {
         setIsLogged(false);
         setUserData(null);
         setLoading(false);
+        toast.success(resp.message);
 
         return resp; // ApiSuccess<unknown>
     }

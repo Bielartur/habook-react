@@ -4,7 +4,7 @@ type Props = React.FormHTMLAttributes<HTMLFormElement> & {
     title: string
     subtitle: string
     submitLabel?: string
-    isSubmiting: boolean
+    isSubmiting?: boolean
     children?: React.ReactNode
 }
 

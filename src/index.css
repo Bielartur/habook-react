@@ -158,7 +158,7 @@
 
 @utility button-auth {
     @apply flex items-center justify-center w-full p-2.5 bg-linear-to-r from-purple to-purple-2 text-white
-    rounded-sm hover:shadow-lg hover:scale-102 active:scale-96 disabled:from-slate-700 disabled:to-slate-600
+    rounded-sm hover:shadow-lg hover:scale-102 active:scale-96 disabled:from-slate-600 disabled:to-slate-500
     transition-transform duration-200 cursor-pointer;
 }
 

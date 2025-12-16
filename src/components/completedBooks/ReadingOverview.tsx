@@ -11,7 +11,6 @@ type Props = {
 }
 
 export const ReadingOverview = ({
-                                    key,
                                     label,
                                     value,
                                     icon,
@@ -19,7 +18,7 @@ export const ReadingOverview = ({
                                     bgColor = "bg-slate-100",
                                 }: Props) => {
     return (
-        <CardContainer key={key}>
+        <CardContainer>
             <div className="flex items-center space-x-3 mb-3">
                 <div className={`p-2 rounded-lg text-lg ${bgColor}`}>
                     {icon}

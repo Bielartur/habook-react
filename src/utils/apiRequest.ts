@@ -72,7 +72,6 @@ export async function apiRequest<T>(
         // se backend respondeu 200 mas com code token_not_valid (acontece em alguns setups)
         if (isTokenNotValid(res1.data)) {
             const newToken = await refreshAccessToken(BASE_URL);
-            console.log("Novo token: " +newToken);
 
             if (!newToken) {
                 clearAccessToken();

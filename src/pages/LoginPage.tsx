@@ -5,23 +5,10 @@ import type {ApiLogin} from "../models/Auth.ts";
 import {AuthInput} from "../components/shared/inputs/AuthInput.tsx";
 import {RememberMe} from "../components/auth/login/RememberMe.tsx";
 import {yupResolver} from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import {ErrorMessage} from "../components/shared/ErrorMessage.tsx";
+import {loginSchema} from "../models/schemas/AuthSchemas.ts";
 import {useNavigate} from "react-router";
 import toast from "react-hot-toast";
-
-const loginSchema = yup.object({
-    email: yup.string().email("Email inválido").required("O email é obrigatório"),
-    password: yup
-        .string()
-        .required("A senha é obrigatória")
-        .min(8, "A senha deve ter no mínimo 8 caracteres")
-        .test(
-            "not-numeric-only",
-            "A senha não pode conter apenas números.",
-            (value) => !/^\d+$/.test(value || "")
-        ),
-});
 
 export const LoginPage = () => {
     const {handleSignIn} = useAuth()
@@ -32,13 +19,13 @@ export const LoginPage = () => {
         handleSubmit,
         // reset,
         formState: {isSubmitting, errors},
-    } = useForm({
-        defaultValues: {email: "", password: ""},
+    } = useForm<ApiLogin>({
+        defaultValues: {email: "", password: "", remember_me: true},
         resolver: yupResolver(loginSchema),
     });
 
     const onSubmit = async (data: ApiLogin) => {
-        const response = await handleSignIn(data.email, data.password);
+        const response = await handleSignIn(data.email, data.password, data.remember_me);
         if (response.success) {
             navigate("/")
             toast.success(response.message);
@@ -75,7 +62,12 @@ export const LoginPage = () => {
                 {errors?.password && <ErrorMessage message={errors.password.message}/>}
             </div>
 
-            <RememberMe inputName="remember_me" label="Lembrar de mim"/>
+            <RememberMe
+                inputName="remember_me"
+                label="Lembrar de mim"
+                {...register("remember_me")}
+            />
+
         </AuthForm>
     )
 }

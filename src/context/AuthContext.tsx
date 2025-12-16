@@ -6,7 +6,7 @@ export type AuthContextValue = {
     setIsLogged: (isLogged: boolean) => void;
     userData: User | null;
     setUserData: (userData: User) => void;
-    handleSignIn: (email: string, password: string) => Promise<ApiResponse<TokenOutput>>;
+    handleSignIn: (email: string, password: string, remember_me?: boolean) => Promise<ApiResponse<TokenOutput>>;
     handleLogout: () => void;
     loading: boolean;
 };

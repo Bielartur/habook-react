@@ -1,11 +1,18 @@
 import {AuthWrapper} from "../components/auth/layout/AuthWrapper.tsx";
 import {AuthContainer} from "../components/auth/layout/AuthContainer.tsx";
 import {ImageContainer} from "../components/auth/layout/ImageContainer.tsx";
-import {Outlet} from "react-router";
+import {Outlet, useNavigate} from "react-router";
 import {useEffect} from "react";
 import {ChildrenContainer} from "../components/auth/layout/ChildrenContainer.tsx";
+import { useAuth } from "../hooks/useAuth.tsx";
 
 export const AuthLayout = () => {
+    const { isLogged } = useAuth()
+    const navigate = useNavigate()
+
+    if (isLogged) {
+        navigate("/")
+    }
 
     useEffect(() => {
         document.body.classList.add("auth-body");

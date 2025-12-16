@@ -1,6 +1,7 @@
-const LOCAL_STORAGE_KEY = "AUTH_ACCESS";
+// const LOCAL_STORAGE_KEY = "AUTH_ACCESS";
+let accessToken = "";
 
 // helpers de token
-export const setAccessToken = (token: string) => localStorage.setItem(LOCAL_STORAGE_KEY, token);
-export const getAccessToken = () => localStorage.getItem(LOCAL_STORAGE_KEY) ?? "";
-export const clearAccessToken = () => localStorage.removeItem(LOCAL_STORAGE_KEY);
+export const setAccessToken = (token: string) => accessToken = token;
+export const getAccessToken = () => accessToken ?? "";
+export const clearAccessToken = () => accessToken = "";

@@ -5,8 +5,8 @@ import type {Book} from "../models/Books.ts";
 import type {UserLivro} from "../models/UserBooks.ts";
 
 // Authentication
-const login = async ({ email, password }: ApiLogin) => {
-    return await apiRequest<TokenOutput>("auth/login", "POST", { email, password }, false);
+const login = async ({ email, password, remember_me }: ApiLogin) => {
+    return await apiRequest<TokenOutput>("auth/login", "POST", { email, password, remember_me }, false);
 };
 
 const cadastrar = async ({ name, email, password, confirm_password }: ApiRegister) => {
