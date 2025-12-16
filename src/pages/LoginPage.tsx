@@ -20,11 +20,12 @@ export const LoginPage = () => {
         // reset,
         formState: {isSubmitting, errors},
     } = useForm<ApiLogin>({
-        defaultValues: {email: "", password: "", remember_me: true},
+        defaultValues: {email: "", password: "", remember_me: false},
         resolver: yupResolver(loginSchema),
     });
 
     const onSubmit = async (data: ApiLogin) => {
+        console.log(data);
         const response = await handleSignIn(data.email, data.password, data.remember_me);
         if (response.success) {
             navigate("/")

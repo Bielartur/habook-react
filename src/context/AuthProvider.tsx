@@ -43,8 +43,8 @@ export const AuthProvider = ({ children }: Props) => {
         }
     };
 
-    const handleSignIn = async (email: string, password: string) => {
-        const resp = await login({ email, password });
+    const handleSignIn = async (email: string, password: string, remember_me?: boolean) => {
+        const resp = await login({ email, password, remember_me });
 
         if (!resp.success) {
             return resp; // ApiError
