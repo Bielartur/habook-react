@@ -2,10 +2,10 @@ import {ConfigContainer} from "./ConfigContainer.tsx";
 
 type Props = {
     label: string
-    info: string
+    info?: string
 }
 
-export const InfoContainer = ({ label, info }: Props) => {
+export const InfoContainer = ({ label, info = "Não informada" }: Props) => {
     return (
         <ConfigContainer className="text-slate-600 gap-1!">
             <p className="text-sm">{label}:</p>

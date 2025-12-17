@@ -3,15 +3,17 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faSquarePollVertical} from "@fortawesome/free-solid-svg-icons";
 import {ButtonGradient} from "../../../shared/buttons/ButtonGradient.tsx";
 import {useState} from "react";
-import {SelectRow} from "../../../shared/inputs/SelectRow.tsx";
 import {ButtonSave} from "../../../shared/buttons/ButtonSave.tsx";
+import {GoalsForm} from "../../../config/GoalsForm.tsx";
 
 type Props = {
     trigger?: React.ReactNode;
 }
 
 export const SetGoalsModal = ({ trigger }: Props) => {
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const [isOpen, setIsOpen] = useState(false);
+
 
     return (
         <ModalBase
@@ -26,11 +28,11 @@ export const SetGoalsModal = ({ trigger }: Props) => {
             bgIconColor="bg-slate-200"
             trigger={trigger ? trigger : <ButtonGradient><FontAwesomeIcon icon={faPlus}/>Novo Livro</ButtonGradient>}
             modalFooter={(
-                    <ButtonSave />
+                    <ButtonSave form={"goals-form-modal"} type={"submit"} disabled={isSubmitting} />
             )}
         >
             <div className="flex-1 relative">
-                <SelectRow />
+                <GoalsForm id={"goals-form-modal"} onSubmittingChange={setIsSubmitting}/>
             </div>
 
         </ModalBase>

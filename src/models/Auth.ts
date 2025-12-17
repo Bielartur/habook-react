@@ -57,16 +57,6 @@ export type ApiRegister = {
     confirm_password: string
 }
 
-export type User = {
-    id: number,
-    name: string,
-    email: string,
-    meta_anual_paginas: number,
-    meta_mensal_paginas: number,
-    meta_diaria_paginas: number,
-    livros: number[]
-}
-
 export type TokenOutput = {
     access: string;
 };

@@ -1,9 +1,10 @@
 // src/hooks/useRequests.js
 import {apiRequest} from "../utils/apiRequest.ts";
-import type {ApiLogin, ApiRegister, TokenOutput, User} from "../models/Auth.ts";
+import type {ApiLogin, ApiRegister, TokenOutput} from "../models/Auth.ts";
 import type {Book} from "../models/Books.ts";
 import type {GetUserBooksParams, UserLivro} from "../models/UserBooks.ts";
 import type {DashboardType, ReadingSummaryType} from "../models/Statistics.ts";
+import type {User, UserGoalsForm} from "../models/User.ts";
 
 type QueryPrimitive = string | number | boolean;
 type QueryValue = QueryPrimitive | QueryPrimitive[] | undefined;
@@ -77,6 +78,10 @@ const getUserBooks = async (params?: GetUserBooksParams) => {
     );
 };
 
+const saveGoals = async ({ meta_anual_paginas, meta_mensal_paginas, meta_diaria_paginas }: UserGoalsForm) => {
+    return await apiRequest("me/goals", "PUT", { meta_anual_paginas, meta_mensal_paginas, meta_diaria_paginas }, true);
+};
+
 
 // Exportando todas as requests
 export const useRequests = () => ({
@@ -85,8 +90,12 @@ export const useRequests = () => ({
     cadastrar,
     refreshToken,
     logout,
-    getUser,
 
+    // User
+    getUser,
+    saveGoals,
+
+    // Statistics
     getDashboard,
     getBooks,
     getUserBooks,

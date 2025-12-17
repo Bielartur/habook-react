@@ -2,8 +2,9 @@ import {useEffect, useState} from "react";
 import { AuthContext, type AuthContextValue } from "./AuthContext.tsx";
 import {useRequests} from "../hooks/useRequests.ts";
 import {clearAccessToken, setAccessToken} from "../utils/HelpersToken.ts";
-import type {ApiResponse, User} from "../models/Auth.ts";
+import type {ApiResponse} from "../models/Auth.ts";
 import toast from "react-hot-toast";
+import type {User} from "../models/User.ts";
 
 type Props = {
     children: React.ReactNode;

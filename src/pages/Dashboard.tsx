@@ -14,11 +14,13 @@ import {AddBookModal} from "../components/dashboard/modals/addBook/AddBookModal.
 import {useRequests} from "../hooks/useRequests.ts";
 import {useEffect, useState} from "react";
 import type {DashboardType} from "../models/Statistics.ts";
+import {useAuth} from "../hooks/useAuth.tsx";
 
 
 export const Dashboard = () => {
-    const { getDashboard } = useRequests()
     const [dashboardData, setDashboardData] = useState<DashboardType | null>()
+    const { getDashboard } = useRequests()
+    const {userData} = useAuth()
 
     useEffect(() => {
         const loadDashboard = async () => {
@@ -30,7 +32,7 @@ export const Dashboard = () => {
         }
 
         loadDashboard()
-    }, [])
+    }, [userData, getDashboard])
 
     return (
         <>
