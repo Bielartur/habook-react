@@ -62,3 +62,21 @@ export const passwordSchema = yup
         if (!v) return true;
         return hasMinCount(/[A-Z]/g, 1)(v);
     });
+
+export const simplePasswordSchema = yup
+    .string()
+    .required("A senha é obrigatória")
+    .min(8, "A senha deve ter no mínimo 8 caracteres")
+    .test(
+        "not-numeric-only",
+        "A senha não pode conter apenas números.",
+        (value) => !/^\d+$/.test(value || "")
+    )
+
+export const confirmPasswordFor = (field: string) =>
+    yup
+        .string()
+        .required("A confirmação de senha é obrigatória.")
+        .test("match", "As senhas devem ser iguais", function (value) {
+            return value === this.parent[field]
+        })

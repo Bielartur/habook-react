@@ -34,6 +34,11 @@ export const Dashboard = () => {
         loadDashboard()
     }, [userData, getDashboard])
 
+    let pagsFaltantes = 0
+    if (dashboardData) {
+        pagsFaltantes = dashboardData?.meta - dashboardData?.lidas
+    }
+
     return (
         <>
             <Section>
@@ -49,7 +54,7 @@ export const Dashboard = () => {
 
                 <CardContainer className="w-full">
                     <TitleChart paginasLidas={dashboardData?.lidas} metaMensal={dashboardData?.meta}/>
-                    <ProgressBarChart pctConcluida={dashboardData?.pct}/>
+                    <ProgressBarChart pctConcluida={dashboardData?.pct} pagsFaltantes={pagsFaltantes} pagsFaltantesPorDia={dashboardData?.necessarias_por_dia}/>
                     <PagesPerDayChart diario={dashboardData?.diario}/>
                 </CardContainer>
 

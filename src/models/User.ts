@@ -16,3 +16,9 @@ export type UserGoalsForm = {
     meta_mensal_paginas: string
     meta_anual_paginas: string
 }
+
+export type UserChangeForm = {
+    old_password: string
+    new_password: string
+    confirm_password: string
+}

@@ -4,7 +4,7 @@ import type {ApiLogin, ApiRegister, TokenOutput} from "../models/Auth.ts";
 import type {Book} from "../models/Books.ts";
 import type {GetUserBooksParams, UserLivro} from "../models/UserBooks.ts";
 import type {DashboardType, ReadingSummaryType} from "../models/Statistics.ts";
-import type {User, UserGoalsForm} from "../models/User.ts";
+import type {User, UserChangeForm, UserGoalsForm} from "../models/User.ts";
 
 type QueryPrimitive = string | number | boolean;
 type QueryValue = QueryPrimitive | QueryPrimitive[] | undefined;
@@ -82,6 +82,10 @@ const saveGoals = async ({ meta_anual_paginas, meta_mensal_paginas, meta_diaria_
     return await apiRequest("me/goals", "PUT", { meta_anual_paginas, meta_mensal_paginas, meta_diaria_paginas }, true);
 };
 
+const changePassword = async ({ old_password, new_password, confirm_password }: UserChangeForm) => {
+    return await apiRequest("me/password", "PUT", { old_password, new_password, confirm_password }, true);
+};
+
 
 // Exportando todas as requests
 export const useRequests = () => ({
@@ -94,6 +98,7 @@ export const useRequests = () => ({
     // User
     getUser,
     saveGoals,
+    changePassword,
 
     // Statistics
     getDashboard,

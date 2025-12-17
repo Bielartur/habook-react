@@ -1,18 +1,10 @@
 import * as yup from 'yup';
-import {passwordSchema} from "./HelpersSchemas.ts";
+import {confirmPasswordFor, passwordSchema, simplePasswordSchema} from "./HelpersSchemas.ts";
 
 
 export const loginSchema = yup.object({
     email: yup.string().email("Email inválido").required("O email é obrigatório"),
-    password: yup
-        .string()
-        .required("A senha é obrigatória")
-        .min(8, "A senha deve ter no mínimo 8 caracteres")
-        .test(
-            "not-numeric-only",
-            "A senha não pode conter apenas números.",
-            (value) => !/^\d+$/.test(value || "")
-        ),
+    password: simplePasswordSchema,
 });
 
 
@@ -24,10 +16,11 @@ export const registerSchema = loginSchema.shape({
 
     password: passwordSchema,
 
-    confirm_password: yup
-        .string()
-        .required("A confirmação de senha é obrigatória.")
-        .test("match", "As senhas devem ser iguais", function (value) {
-            return value === this.parent.password;
-        }),
+    confirm_password: confirmPasswordFor("password"),
 });
+
+export const changePasswordSchema = yup.object({
+    old_password: simplePasswordSchema,
+    new_password: passwordSchema,
+    confirm_password: confirmPasswordFor("new_password"),
+})
