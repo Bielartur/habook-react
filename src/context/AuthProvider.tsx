@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }: Props) => {
     const [isLogged, setIsLogged] = useState(false);
     const [userData, setUserData] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
+    const [refresh, setRefresh] = useState<boolean>(false);
 
     useEffect(() => {
         void handleInitUser();
@@ -105,6 +106,8 @@ export const AuthProvider = ({ children }: Props) => {
         setIsLogged,
         userData,
         setUserData,
+        refresh,
+        setRefresh,
         handleSignIn,
         handleLogout,
         loading,

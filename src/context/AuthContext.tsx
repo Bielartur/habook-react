@@ -7,6 +7,8 @@ export type AuthContextValue = {
     setIsLogged:  React.Dispatch<React.SetStateAction<boolean>>;
     userData: User | null;
     setUserData:  React.Dispatch<React.SetStateAction<User | null>>;
+    refresh: boolean;
+    setRefresh:  React.Dispatch<React.SetStateAction<boolean>>;
     handleSignIn: (email: string, password: string, remember_me?: boolean) => Promise<ApiResponse<TokenOutput>>;
     handleLogout: () => void;
     loading: boolean;

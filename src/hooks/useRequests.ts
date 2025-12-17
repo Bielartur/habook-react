@@ -1,7 +1,7 @@
 // src/hooks/useRequests.js
 import {apiRequest} from "../utils/apiRequest.ts";
 import type {ApiLogin, ApiRegister, TokenOutput} from "../models/Auth.ts";
-import type {Book} from "../models/Books.ts";
+import type {AddBook, Book, Category} from "../models/Books.ts";
 import type {GetUserBooksParams, UserLivro} from "../models/UserBooks.ts";
 import type {DashboardType, ReadingSummaryType} from "../models/Statistics.ts";
 import type {User, UserChangeForm, UserGoalsForm} from "../models/User.ts";
@@ -59,6 +59,14 @@ const getBooks = async () => {
     return await apiRequest<Array<Book>>("books/", "GET");
 }
 
+const addBook = async ({titulo, autor, categoria_id, total_paginas, isbn, capa_url, google_id}: AddBook) => {
+    return await apiRequest("books/create/", "POST", {titulo, autor, categoria_id, total_paginas, isbn, capa_url, google_id}, true);
+}
+
+const getCategories = async () => {
+    return await apiRequest<Array<Category>>("categories/", "GET");
+}
+
 const getReadingSummary = async () => {
     return await apiRequest<ReadingSummaryType>("me/books/reading-summary", "GET", undefined, true);
 };
@@ -102,7 +110,11 @@ export const useRequests = () => ({
 
     // Statistics
     getDashboard,
-    getBooks,
     getUserBooks,
     getReadingSummary,
+
+    // Books / Categories
+    getBooks,
+    addBook,
+    getCategories,
 });

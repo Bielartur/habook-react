@@ -14,6 +14,7 @@ type Props = {
 
 export const AddBookModal = ({ trigger }: Props) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     return (
         <ModalBase
@@ -32,7 +33,7 @@ export const AddBookModal = ({ trigger }: Props) => {
                             Cancelar
                         </ButtonSubtle>
                     </Dialog.Close>
-                    <ButtonGradient className="w-1/2 gap-2">
+                    <ButtonGradient disabled={isSubmitting} type={"submit"} form="add-book-form" className="w-1/2 gap-2">
                         Enviar
                         <FontAwesomeIcon icon={faPaperPlane}/>
                     </ButtonGradient>
@@ -40,7 +41,7 @@ export const AddBookModal = ({ trigger }: Props) => {
             )}
         >
             <div className="flex-1 relative">
-                <BookSearchSection/>
+                <BookSearchSection setIsSubmitting={setIsSubmitting} setIsOpen={setIsOpen}/>
             </div>
 
         </ModalBase>

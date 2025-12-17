@@ -60,7 +60,7 @@ export const Dashboard = () => {
 
             </Section>
 
-            <Section>
+            <Section id="current-books">
                 <Subtitle text="Livros em andamento">
                     <AddBookModal />
                 </Subtitle>

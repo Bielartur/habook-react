@@ -7,10 +7,12 @@ import {useEffect, useState} from "react";
 import type {UserLivro} from "../../../models/UserBooks.ts";
 import {useRequests} from "../../../hooks/useRequests.ts";
 import type {ApiResponse} from "../../../models/Auth.ts";
+import {useAuth} from "../../../hooks/useAuth.tsx";
 
 export const ListCurrentBooks = () => {
     const { getUserBooks } = useRequests()
     const [currentBooks, setCurrentBooks] = useState<UserLivro[]>([])
+    const { refresh } = useAuth()
 
     useEffect(() => {
         const loadUserBooks = async () => {
@@ -22,7 +24,7 @@ export const ListCurrentBooks = () => {
         }
 
         loadUserBooks();
-    }, [getUserBooks])
+    }, [refresh, getUserBooks])
 
 
     if (!currentBooks) {
