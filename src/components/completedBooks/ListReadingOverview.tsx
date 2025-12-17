@@ -4,34 +4,54 @@ import {ReadingOverview} from "./ReadingOverview.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowTrendUp} from "@fortawesome/free-solid-svg-icons";
 import {faStar} from "@fortawesome/free-regular-svg-icons";
+import {useRequests} from "../../hooks/useRequests.ts";
+import {useEffect, useState} from "react";
+import type {ReadingSummaryType} from "../../models/Statistics.ts";
+import {renderNumberOrLoading} from "../shared/loadings/renderNumberOrLoading.tsx";
 
-const readingOverviews = [
-    {
-        label: "Total de Livros",
-        icon: <BookOpen className={"text-emerald-600"}/>,
-        bgColor: "bg-emerald-100",
-        value: 5,
-    },
-    {
-        label: "Total de Páginas",
-        icon: <FontAwesomeIcon icon={faArrowTrendUp} className="text-blue-600" />,
-        bgColor: "bg-blue-100",
-        value: 1234,
-    },
-    {
-        label: "Avaliação média",
-        icon: <FontAwesomeIcon icon={faStar} className="text-yellow-600" />,
-        bgColor: "bg-yellow-100",
-        rating: 4.8
-    }
-]
 
 export const ListReadingOverview = () => {
+    const { getReadingSummary } = useRequests()
+    const [summaryData, setSummaryData] = useState<ReadingSummaryType | null>();
+
+    useEffect(() => {
+        const loadSummary = async () => {
+            const response = await getReadingSummary();
+
+            if (response.success) {
+                setSummaryData(response.payload)
+            }
+        }
+
+        loadSummary();
+    }, [getReadingSummary]);
+
+    const readingOverviews = [
+        {
+            label: "Total de Livros",
+            icon: <BookOpen className={"text-emerald-600"}/>,
+            bgColor: "bg-emerald-100",
+            value: renderNumberOrLoading(summaryData?.total_livros_concluidos),
+        },
+        {
+            label: "Total de Páginas",
+            icon: <FontAwesomeIcon icon={faArrowTrendUp} className="text-blue-600" />,
+            bgColor: "bg-blue-100",
+            value: renderNumberOrLoading(summaryData?.total_paginas_lidas),
+        },
+        {
+            label: "Avaliação média",
+            icon: <FontAwesomeIcon icon={faStar} className="text-yellow-600" />,
+            bgColor: "bg-yellow-100",
+            rating: summaryData?.avaliacao_media ? parseFloat(summaryData?.avaliacao_media) : 0
+        }
+    ]
+
     return (
         <ListCards
-            cards={readingOverviews.map(({label, icon, value, rating, bgColor}, index) => (
+            cards={readingOverviews.map(({label, icon, value, rating, bgColor}) => (
                 <ReadingOverview
-                    key={"reading-overview-" + index}
+                    key={"reading-overview-" + label}
                     label={label}
                     value={value}
                     icon={icon}

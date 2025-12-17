@@ -2,34 +2,22 @@ import {CardContainer} from "../shared/containers/CardContainer.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCalendar} from "@fortawesome/free-regular-svg-icons";
 import {StarRating} from "../shared/StarRating.tsx";
+import type {UserLivro} from "../../models/UserBooks.ts";
+import {formatDate} from "../../utils/globalHelpers.ts";
+import {SmallLoading} from "../shared/loadings/SmallLoading.tsx";
 
 
-type Props = {
-    livro: {
-        id: number
-        titulo: string
-        autor: string
-        capaUrl: string
-        categoria: {
-            id: number
-            nome: string
-        }
-        totalPaginas: number
-    },
-    userbook: {
-        concluido_em: string
-    }
-}
+type Props = UserLivro
 
-export const CardCompletedBooks = ({ livro, userbook }: Props) => {
-    const { titulo, autor, capaUrl, categoria, totalPaginas } = livro;
-    const { concluido_em } = userbook;
+export const CardCompletedBooks = ({ livro, progresso }: Props) => {
+    const { titulo, autor, capa_url, categoria, total_paginas } = livro;
+    const { concluido_em, avaliacao } = progresso;
 
     return (
         <CardContainer>
             <div className="relative mb-4">
                 <img
-                    src={capaUrl}
+                    src={capa_url ? capa_url : "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=400"}
                     alt={titulo}
                     className="w-full h-48 object-contain rounded-xl shadow-md group-hover:scale-105 transition-transform duration-300"
                 />
@@ -43,15 +31,15 @@ export const CardCompletedBooks = ({ livro, userbook }: Props) => {
                     <p className="text-slate-600 text-sm">{autor}</p>
                 </div>
                 <div className="flex items-center space-x-1 mb-2">
-                    <StarRating rating={4} />
-                    <span className="text-sm text-slate-500 ml-2">(5/5)</span>
+                    <StarRating rating={avaliacao.media} />
+                    <span className="text-sm text-slate-500 ml-2">({avaliacao.quantidade})</span>
                 </div>
                 <div className="flex items-center justify-between text-sm text-slate-500">
                     <div className="flex items-center space-x-1">
                         <FontAwesomeIcon icon={faCalendar} />
-                        <span>{concluido_em}</span>
+                        <span>{concluido_em ? formatDate(concluido_em) : <SmallLoading />}</span>
                     </div>
-                    <span>{totalPaginas} páginas</span>
+                    <span>{total_paginas} páginas</span>
                 </div>
             </div>
         </CardContainer>

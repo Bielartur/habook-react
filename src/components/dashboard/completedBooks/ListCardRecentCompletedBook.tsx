@@ -4,64 +4,6 @@ import {useEffect, useState} from "react";
 import type {UserLivro} from "../../../models/UserBooks.ts";
 import type {ApiResponse} from "../../../models/Auth.ts";
 
-// const livrosConcluidos = [
-//     {
-//         livro: {
-//             titulo: "As armas da persuasão",
-//             autor: "Robert B. Cialdini",
-//             capaUrl: "https://books.google.com/books/content?id=8ciHAAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-//         },
-//         userbook: {
-//             avaliacao: 5,
-//             concluido_em: "02/12/2025"
-//         }
-//     },
-//     {
-//         livro: {
-//             titulo: "As armas da persuasão",
-//             autor: "Robert B. Cialdini",
-//             capaUrl: "https://books.google.com/books/content?id=8ciHAAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-//         },
-//         userbook: {
-//             avaliacao: 5,
-//             concluido_em: "02/12/2025"
-//         }
-//     },
-//     {
-//         livro: {
-//             titulo: "As armas da persuasão",
-//             autor: "Robert B. Cialdini",
-//             capaUrl: "https://books.google.com/books/content?id=8ciHAAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-//         },
-//         userbook: {
-//             avaliacao: 5,
-//             concluido_em: "02/12/2025"
-//         }
-//     },
-//     {
-//         livro: {
-//             titulo: "As armas da persuasão",
-//             autor: "Robert B. Cialdini",
-//             capaUrl: "https://books.google.com/books/content?id=8ciHAAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-//         },
-//         userbook: {
-//             avaliacao: 5,
-//             concluido_em: "02/12/2025"
-//         }
-//     },
-//     {
-//         livro: {
-//             titulo: "As armas da persuasão",
-//             autor: "Robert B. Cialdini",
-//             capaUrl: "https://books.google.com/books/content?id=8ciHAAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-//         },
-//         userbook: {
-//             avaliacao: 5,
-//             concluido_em: "02/12/2025"
-//         }
-//     }
-// ]
-
 export const ListCardRecentCompletedBooks = () => {
     const {getUserBooks} = useRequests()
     const [recentCompletedBooks, setRecentCompletedBooks] = useState<UserLivro[]>([])

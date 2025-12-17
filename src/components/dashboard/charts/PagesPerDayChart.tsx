@@ -21,8 +21,6 @@ export const PagesPerDayChart = ({diario}: Props) => {
         return <SmallLoading />
     }
 
-    console.log(diario);
-
     return (
         <div className="w-full h-72 p-4 px-0 pb-12">
             <h3 className="text-base text-slate-600 font-semibold mb-4">Páginas por dia</h3>

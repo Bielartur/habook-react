@@ -15,3 +15,9 @@ export interface DashboardType {
     diario: DiarioData;
     // ex: { "2025-09-01": 12, "2025-09-02": 0 }
 }
+
+export interface ReadingSummaryType {
+    total_paginas_lidas: number;
+    total_livros_concluidos: number;
+    avaliacao_media: string;
+}

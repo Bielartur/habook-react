@@ -5,7 +5,7 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
     infoCard: {
         label: string
         icon: JSX.Element
-        qtd: number | JSX.Element
+        qtd: React.ReactNode
         descricao_qtd: string
         bgColor: string
         textColor: string

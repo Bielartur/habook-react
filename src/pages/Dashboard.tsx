@@ -13,7 +13,6 @@ import {Link} from "react-router";
 import {AddBookModal} from "../components/dashboard/modals/addBook/AddBookModal.tsx";
 import {useRequests} from "../hooks/useRequests.ts";
 import {useEffect, useState} from "react";
-import toast from "react-hot-toast";
 import type {DashboardType} from "../models/Statistics.ts";
 
 
@@ -26,9 +25,7 @@ export const Dashboard = () => {
             const response = await getDashboard();
 
             if (response.success) {
-                toast.success(response.message)
                 setDashboardData(response.payload)
-                console.log(response.payload)
             }
         }
 

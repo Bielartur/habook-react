@@ -7,7 +7,7 @@ import { TextoMotivador } from "./TextoMotivador"
 import { AddBookTrigger } from "./AddBookTrigger"
 import { CardDashboard } from "./CardDashboard"
 import { ListCards } from "../../shared/ListCards"
-import {SmallLoading} from "../../shared/loadings/SmallLoading.tsx";
+import {renderNumberOrLoading} from "../../shared/loadings/renderNumberOrLoading.tsx";
 
 type Props = {
     paginasLidas: number | undefined
@@ -22,7 +22,7 @@ export const ListCardsDashboard = ({paginasLidas, pctConcluida, diasConsecutivos
         {
             label: "Este mês",
             icon: <BookText />,
-            qtd: typeof paginasLidas === "number" ? paginasLidas : <SmallLoading hasLabel={false} />,
+            qtd: renderNumberOrLoading(paginasLidas),
             descricao_qtd: "páginas lidas",
             bgColor: "bg-indigo-100",
             textColor: "text-accent-alt",
@@ -31,7 +31,7 @@ export const ListCardsDashboard = ({paginasLidas, pctConcluida, diasConsecutivos
         {
             label: "Sequência",
             icon: <FontAwesomeIcon icon={faFire} />,
-            qtd: typeof diasConsecutivos === "number" ? diasConsecutivos : <SmallLoading hasLabel={false} />,
+            qtd: renderNumberOrLoading(diasConsecutivos),
             descricao_qtd: "dias consecutivos",
             bgColor: "bg-cyan-100",
             textColor: "text-accent",
@@ -40,7 +40,7 @@ export const ListCardsDashboard = ({paginasLidas, pctConcluida, diasConsecutivos
         {
             label: "Em andamento",
             icon: <FontAwesomeIcon icon={faCalendar} />,
-            qtd: typeof qtdLivrosAndamento === "number" ? qtdLivrosAndamento : <SmallLoading hasLabel={false} />,
+            qtd: renderNumberOrLoading(qtdLivrosAndamento),
             descricao_qtd: "livros ativos",
             bgColor: "bg-violet-100",
             textColor: "text-violet-600",

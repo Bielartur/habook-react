@@ -1,10 +1,11 @@
 import {CardContainer} from "../shared/containers/CardContainer.tsx";
 import {StarRating} from "../shared/StarRating.tsx";
+import {renderNumberOrLoading} from "../shared/loadings/renderNumberOrLoading.tsx";
 
 type Props = {
     key: number | string;
     label: string;
-    value?: number;
+    value?: number | React.ReactNode;
     icon: React.ReactNode
     rating?: number | undefined;
     bgColor?: string
@@ -25,7 +26,7 @@ export const ReadingOverview = ({
                 </div>
                 <span className="text-sm font-medium text-slate-500">{label}</span>
             </div>
-            <h3 className="text-3xl font-bold text-slate-700 flex gap-2">{typeof rating === "number" ? rating : value} {typeof rating === "number" ?
+            <h3 className="text-3xl font-bold text-slate-700 flex gap-2">{value ? renderNumberOrLoading(value) : rating} {typeof rating === "number" ?
                 <StarRating rating={rating}/> : null}
             </h3>
         </CardContainer>

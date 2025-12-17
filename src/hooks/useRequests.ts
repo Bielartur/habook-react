@@ -3,7 +3,7 @@ import {apiRequest} from "../utils/apiRequest.ts";
 import type {ApiLogin, ApiRegister, TokenOutput, User} from "../models/Auth.ts";
 import type {Book} from "../models/Books.ts";
 import type {GetUserBooksParams, UserLivro} from "../models/UserBooks.ts";
-import type {DashboardType} from "../models/Statistics.ts";
+import type {DashboardType, ReadingSummaryType} from "../models/Statistics.ts";
 
 type QueryPrimitive = string | number | boolean;
 type QueryValue = QueryPrimitive | QueryPrimitive[] | undefined;
@@ -53,9 +53,14 @@ const getDashboard = async () => {
     return await apiRequest<DashboardType>("me/dashboard", "GET", undefined, true);
 };
 
+
 const getBooks = async () => {
     return await apiRequest<Array<Book>>("books/", "GET");
 }
+
+const getReadingSummary = async () => {
+    return await apiRequest<ReadingSummaryType>("me/books/reading-summary", "GET", undefined, true);
+};
 
 const getUserBooks = async (params?: GetUserBooksParams) => {
     const query = buildQueryString(params);
@@ -85,4 +90,5 @@ export const useRequests = () => ({
     getDashboard,
     getBooks,
     getUserBooks,
+    getReadingSummary,
 });
