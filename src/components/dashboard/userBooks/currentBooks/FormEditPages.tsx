@@ -1,9 +1,9 @@
-import {BasicInput} from "../../shared/inputs/BasicInput.tsx";
-import {ButtonGradient} from "../../shared/buttons/ButtonGradient.tsx";
-import {ButtonSubtle} from "../../shared/buttons/ButtonSubtle.tsx";
+import {BasicInput} from "../../../shared/inputs/BasicInput.tsx";
+import {ButtonGradient} from "../../../shared/buttons/ButtonGradient.tsx";
+import {ButtonSubtle} from "../../../shared/buttons/ButtonSubtle.tsx";
 import {Activity, useEffect, useRef, useState} from "react";
 import {Pen} from "lucide-react";
-import type {UpdatePagesPayload} from "../../../models/UserBooks.ts";
+import type {UpdatePagesPayload} from "../../../../models/UserBooks.ts";
 
 type Props = Omit<React.FormHTMLAttributes<HTMLFormElement>, "onSubmit"> & {
     paginaAtual: number

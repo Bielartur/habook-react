@@ -1,14 +1,14 @@
-import {CardContainer} from "../../shared/containers/CardContainer.tsx";
+import {CardContainer} from "../../../shared/containers/CardContainer.tsx";
 import {faClock} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {LineProgressBar} from "../../shared/LineProgressBar.tsx";
-import {truncate} from "../../../utils/globalHelpers.ts";
+import {LineProgressBar} from "../../../shared/LineProgressBar.tsx";
+import {truncate} from "../../../../utils/globalHelpers.ts";
 import {FormEditPages} from "./FormEditPages.tsx";
-import type {LivroResumo, Progresso, UpdatePagesPayload} from "../../../models/UserBooks.ts";
-import {useRequests} from "../../../hooks/useRequests.ts";
+import type {LivroResumo, Progresso, UpdatePagesPayload} from "../../../../models/UserBooks.ts";
+import {useRequests} from "../../../../hooks/useRequests.ts";
 import toast from "react-hot-toast";
 import {FormAddDefinedPages} from "./FormAddDefinedPages.tsx";
-import {useAuth} from "../../../hooks/useAuth.tsx";
+import {useAuth} from "../../../../hooks/useAuth.tsx";
 import {useState} from "react";
 
 

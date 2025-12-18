@@ -1,9 +1,9 @@
-import {CardContainer} from "../../shared/containers/CardContainer.tsx";
-import {StarRating} from "../../shared/StarRating.tsx";
+import {CardContainer} from "../../../shared/containers/CardContainer.tsx";
+import {StarRating} from "../../../shared/StarRating.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from "@fortawesome/free-regular-svg-icons";
-import type {UserLivro} from "../../../models/UserBooks.ts";
-import {formatDate} from "../../../utils/globalHelpers.ts";
+import type {UserLivro} from "../../../../models/UserBooks.ts";
+import {formatDate} from "../../../../utils/globalHelpers.ts";
 
 export const CardRecentCompletedBook = ({ livro, progresso }: UserLivro) => {
     return (

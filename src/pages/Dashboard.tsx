@@ -6,21 +6,17 @@ import {ListCardsDashboard} from "../components/dashboard/cardsDashboard/ListCar
 import {TitleChart} from "../components/dashboard/charts/TitleChart"
 import {ProgressBarChart} from "../components/dashboard/charts/ProgressBarChart"
 import {PagesPerDayChart} from "../components/dashboard/charts/PagesPerDayChart"
-import {Subtitle} from "../components/shared/titles/Subtitle"
-import {ListCurrentBooks} from "../components/dashboard/currentBooks/ListCurrentBooks.tsx";
-import {ListCardRecentCompletedBooks} from "../components/dashboard/completedBooks/ListCardRecentCompletedBook.tsx";
-import {Link} from "react-router";
-import {AddBookModal} from "../components/dashboard/modals/addBook/AddBookModal.tsx";
 import {useRequests} from "../hooks/useRequests.ts";
 import {useEffect, useState} from "react";
 import type {DashboardType} from "../models/Statistics.ts";
 import {useAuth} from "../hooks/useAuth.tsx";
+import {UserBooks} from "../components/dashboard/userBooks/UserBooks.tsx";
 
 
 export const Dashboard = () => {
     const [dashboardData, setDashboardData] = useState<DashboardType | null>()
     const { getDashboard } = useRequests()
-    const {userData} = useAuth()
+    const {userData, refresh} = useAuth()
 
     useEffect(() => {
         const loadDashboard = async () => {
@@ -32,7 +28,7 @@ export const Dashboard = () => {
         }
 
         loadDashboard()
-    }, [userData, getDashboard])
+    }, [refresh, userData, getDashboard])
 
     let pagsFaltantes = 0
     if (dashboardData) {
@@ -60,22 +56,7 @@ export const Dashboard = () => {
 
             </Section>
 
-            <Section id="current-books">
-                <Subtitle text="Livros em andamento">
-                    <AddBookModal />
-                </Subtitle>
-                <ListCurrentBooks/>
-            </Section>
-
-            <Section>
-                <Subtitle text="Concluídos Recentemente">
-                    <Link to="/livros_concluidos"
-                          className="text-accent hover:text-accent-alt font-medium transition-colors whitespace-nowrap">
-                        Ver todos →
-                    </Link>
-                </Subtitle>
-                <ListCardRecentCompletedBooks/>
-            </Section>
+            <UserBooks />
         </>
     )
 }

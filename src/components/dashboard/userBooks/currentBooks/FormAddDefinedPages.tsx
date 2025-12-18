@@ -1,5 +1,5 @@
-import {ButtonAddPage} from "../../shared/buttons/ButtonAddPage.tsx";
-import type {UpdatePagesPayload} from "../../../models/UserBooks.ts";
+import {ButtonAddPage} from "../../../shared/buttons/ButtonAddPage.tsx";
+import type {UpdatePagesPayload} from "../../../../models/UserBooks.ts";
 
 type Props = {
     onValidSubmit: (data: UpdatePagesPayload) => Promise<void> | void
