@@ -2,7 +2,7 @@
 import {apiRequest} from "../utils/apiRequest.ts";
 import type {ApiLogin, ApiRegister, TokenOutput} from "../models/Auth.ts";
 import type {AddBook, Book, Category} from "../models/Books.ts";
-import type {GetUserBooksParams, UserLivro} from "../models/UserBooks.ts";
+import type {GetUserBooksParams, UpdatePagesPayload, updatePagesResponse, UserLivro} from "../models/UserBooks.ts";
 import type {DashboardType, ReadingSummaryType} from "../models/Statistics.ts";
 import type {User, UserChangeForm, UserGoalsForm} from "../models/User.ts";
 
@@ -50,10 +50,21 @@ const getUser = async () => {
     return await apiRequest<User>("me/", "GET", undefined, true);
 };
 
+const saveGoals = async ({ meta_anual_paginas, meta_mensal_paginas, meta_diaria_paginas }: UserGoalsForm) => {
+    return await apiRequest("me/goals", "PUT", { meta_anual_paginas, meta_mensal_paginas, meta_diaria_paginas }, true);
+};
+
+const changePassword = async ({ old_password, new_password, confirm_password }: UserChangeForm) => {
+    return await apiRequest("me/password", "PUT", { old_password, new_password, confirm_password }, true);
+};
+
 const getDashboard = async () => {
     return await apiRequest<DashboardType>("me/dashboard", "GET", undefined, true);
 };
 
+const getReadingSummary = async () => {
+    return await apiRequest<ReadingSummaryType>("me/books/reading-summary", "GET", undefined, true);
+};
 
 const getBooks = async () => {
     return await apiRequest<Array<Book>>("books/", "GET");
@@ -67,9 +78,6 @@ const getCategories = async () => {
     return await apiRequest<Array<Category>>("categories/", "GET");
 }
 
-const getReadingSummary = async () => {
-    return await apiRequest<ReadingSummaryType>("me/books/reading-summary", "GET", undefined, true);
-};
 
 const getUserBooks = async (params?: GetUserBooksParams) => {
     const query = buildQueryString(params);
@@ -86,13 +94,10 @@ const getUserBooks = async (params?: GetUserBooksParams) => {
     );
 };
 
-const saveGoals = async ({ meta_anual_paginas, meta_mensal_paginas, meta_diaria_paginas }: UserGoalsForm) => {
-    return await apiRequest("me/goals", "PUT", { meta_anual_paginas, meta_mensal_paginas, meta_diaria_paginas }, true);
-};
+const updatePages = async (  book_id: number, payload: UpdatePagesPayload) => {
+    return await apiRequest<updatePagesResponse>(`me/books/${book_id}/progress`, "PATCH", payload, true);
+}
 
-const changePassword = async ({ old_password, new_password, confirm_password }: UserChangeForm) => {
-    return await apiRequest("me/password", "PUT", { old_password, new_password, confirm_password }, true);
-};
 
 
 // Exportando todas as requests
@@ -116,5 +121,6 @@ export const useRequests = () => ({
     // Books / Categories
     getBooks,
     addBook,
+    updatePages,
     getCategories,
 });

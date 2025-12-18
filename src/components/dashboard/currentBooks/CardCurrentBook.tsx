@@ -2,10 +2,14 @@ import {CardContainer} from "../../shared/containers/CardContainer.tsx";
 import {faClock} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {LineProgressBar} from "../../shared/LineProgressBar.tsx";
-import {ButtonAddPage} from "../../shared/buttons/ButtonAddPage.tsx";
 import {truncate} from "../../../utils/globalHelpers.ts";
 import {FormEditPages} from "./FormEditPages.tsx";
-import type {LivroResumo, Progresso} from "../../../models/UserBooks.ts";
+import type {LivroResumo, Progresso, UpdatePagesPayload} from "../../../models/UserBooks.ts";
+import {useRequests} from "../../../hooks/useRequests.ts";
+import toast from "react-hot-toast";
+import {FormAddDefinedPages} from "./FormAddDefinedPages.tsx";
+import {useAuth} from "../../../hooks/useAuth.tsx";
+import {useState} from "react";
 
 
 type Props = {
@@ -14,12 +18,27 @@ type Props = {
 }
 
 export const CardCurrentBook = ({livro, progresso}: Props) => {
+    const { updatePages } = useRequests()
+    const { setRefresh } = useAuth()
+    const [loading, setLoading] = useState<boolean>(false)
+
+    const onSubmit = async (data: UpdatePagesPayload) => {
+        setLoading(true)
+        const response = await updatePages(livro.id, data)
+
+        if (response.success) {
+            setRefresh((prev) => !prev)
+            setLoading(false)
+            toast.success(response.message)
+        } else {
+            setLoading(false)
+            toast.error(response.message)
+        }
+    }
 
     const {titulo, autor, capa_url, total_paginas} = livro;
     const {dias_em_leitura, progresso_percentual, pagina_atual, paginas_restantes} = progresso;
     const percentualRestante = 100 - progresso_percentual;
-
-    // const [paginaAtual, setPaginaAtual] = useState(userbook.paginaAtual);
 
     return (
         <CardContainer key={`livro-${livro.id}`}>
@@ -49,7 +68,7 @@ export const CardCurrentBook = ({livro, progresso}: Props) => {
             <div className="space-y-4">
                 <div className="flex items-center justify-between">
 
-                    <FormEditPages paginaAtual={pagina_atual} totalPaginas={total_paginas} />
+                    <FormEditPages paginaAtual={pagina_atual} totalPaginas={total_paginas} onValidSubmit={onSubmit} />
 
                     <span className="text-sm font-medium text-accent">
                         {progresso_percentual}%
@@ -63,12 +82,7 @@ export const CardCurrentBook = ({livro, progresso}: Props) => {
                     <span>{percentualRestante}% restante</span>
                 </div>
 
-                <div className="flex items-center space-x-2 pt-2 border-t border-slate-100">
-                    <span className="text-xs text-slate-500">Adicionar: </span>
-                    <ButtonAddPage qtdPages={5}/>
-                    <ButtonAddPage qtdPages={10}/>
-                    <ButtonAddPage qtdPages={25}/>
-                </div>
+                <FormAddDefinedPages isLoading={loading} onValidSubmit={onSubmit}/>
             </div>
         </CardContainer>
     )

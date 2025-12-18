@@ -9,7 +9,6 @@ import {
     ResponsiveContainer,
 } from "recharts"
 import type {DiarioData} from "../../../models/Statistics.ts";
-import {SmallLoading} from "../../shared/loadings/SmallLoading.tsx";
 
 type Props = {
     diario?: DiarioData;
@@ -17,16 +16,14 @@ type Props = {
 
 export const PagesPerDayChart = ({diario}: Props) => {
 
-    if (!diario) {
-        return <SmallLoading />
-    }
+    const emptyChart = Array(30).fill(0);
 
     return (
         <div className="w-full h-72 p-4 px-0 pb-12">
             <h3 className="text-base text-slate-600 font-semibold mb-4">Páginas por dia</h3>
 
             <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={diario} barSize={18}>
+                <BarChart data={diario ? diario : emptyChart} barSize={18}>
                     {/* Grade pontilhada */}
                     <CartesianGrid strokeDasharray="3 3" vertical={false}/>
 

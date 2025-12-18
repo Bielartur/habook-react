@@ -8,7 +8,7 @@ type Props = {
 export const SmallLoading = ({hasLabel = true}: Props) => {
     return (
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "0.25rem", gap: "0.5rem" }}>
-            <CircularProgress color="inherit" size={20} />
+            <CircularProgress color="inherit" size={20} className="text-slate-600" />
             {hasLabel && <span>Carregando...</span>}
         </Box>
     )

@@ -8,18 +8,21 @@ import type {UserLivro} from "../../../models/UserBooks.ts";
 import {useRequests} from "../../../hooks/useRequests.ts";
 import type {ApiResponse} from "../../../models/Auth.ts";
 import {useAuth} from "../../../hooks/useAuth.tsx";
+import {BigLoading} from "../../shared/loadings/BigLoading.tsx";
 
 export const ListCurrentBooks = () => {
     const { getUserBooks } = useRequests()
     const [currentBooks, setCurrentBooks] = useState<UserLivro[]>([])
+    const [loading, setLoading] = useState<boolean>(true)
     const { refresh } = useAuth()
 
     useEffect(() => {
         const loadUserBooks = async () => {
-            const response: ApiResponse<UserLivro[]> = await getUserBooks({status: "em_andamento"});
+            const response: ApiResponse<UserLivro[]> = await getUserBooks({status: "em_andamento", ordering: "titulo"});
 
             if (!response.success || !response.payload) return;
 
+            setLoading(false)
             setCurrentBooks(response.payload);
         }
 
@@ -27,7 +30,10 @@ export const ListCurrentBooks = () => {
     }, [refresh, getUserBooks])
 
 
-    if (!currentBooks) {
+    if (loading) {
+        return <BigLoading />
+    }
+    else if (currentBooks.length === 0) {
         return (
             <div
                 className="h-36 p-4 flex justify-center items-center flex-col gap-4 text-xl italic text-slate-600 font-[500]">
