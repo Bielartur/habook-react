@@ -48,7 +48,7 @@ export const Dashboard = () => {
                     pctConcluida={dashboardData?.pct}
                 />
 
-                <CardContainer className="w-full">
+                <CardContainer className="w-full" delay={0.36}>
                     <TitleChart paginasLidas={dashboardData?.lidas} metaMensal={dashboardData?.meta}/>
                     <ProgressBarChart pctConcluida={dashboardData?.pct} pagsFaltantes={pagsFaltantes} pagsFaltantesPorDia={dashboardData?.necessarias_por_dia}/>
                     <PagesPerDayChart diario={dashboardData?.diario}/>

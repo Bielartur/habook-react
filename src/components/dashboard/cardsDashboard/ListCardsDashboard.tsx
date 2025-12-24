@@ -50,6 +50,7 @@ export const ListCardsDashboard = ({paginasLidas, pctConcluida, diasConsecutivos
 
     return (
         <ListCards
+            startDelay={0.12}
             items={infoCards}
             getKey={(item) => `card-dashboard-${item.label}`}
             renderItem={(item) => (

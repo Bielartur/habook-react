@@ -15,7 +15,7 @@ export const NavList = () => {
                 Dashboard
             </NavItem>
 
-            <NavItem to="/livros_concluidos">
+            <NavItem to="/livros_concluidos/#completedBooks">
                 <FontAwesomeIcon icon={faCircleCheck} />
                 Livros Concluídos
             </NavItem>

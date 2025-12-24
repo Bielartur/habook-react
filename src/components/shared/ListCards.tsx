@@ -1,13 +1,13 @@
 import React from "react";
-import {motion, stagger, type Variants} from "framer-motion";
+import { motion, stagger, type Variants } from "framer-motion";
 
 const list: Variants = {
     hidden: {},
-    show: {
+    show: (startDelay: number = 0) => ({
         transition: {
-            delayChildren: stagger(0.12),
+            delayChildren: stagger(0.12, { startDelay }), // 👈 aqui entra a prop
         },
-    },
+    }),
 };
 
 const item: Variants = {
@@ -27,6 +27,7 @@ type Props<T> = {
     minWidth?: string;
     autoFill?: boolean;
     className?: string;
+    startDelay?: number; // 👈 nova prop
 };
 
 export const ListCards = <T,>({
@@ -36,6 +37,7 @@ export const ListCards = <T,>({
       minWidth = "16rem",
       autoFill = false,
       className = "",
+      startDelay = 0,
   }: Props<T>) => {
     return (
         <motion.ul
@@ -44,8 +46,10 @@ export const ListCards = <T,>({
                 gridTemplateColumns: `repeat(${autoFill ? "auto-fill" : "auto-fit"}, minmax(${minWidth}, 1fr))`,
             }}
             variants={list}
+            custom={startDelay}
             initial="hidden"
-            animate="show"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
         >
             {items.map((it, index) => (
                 <motion.li key={getKey(it, index)} variants={item}>
@@ -53,5 +57,6 @@ export const ListCards = <T,>({
                 </motion.li>
             ))}
         </motion.ul>
+
     );
 };

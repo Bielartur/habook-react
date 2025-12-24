@@ -8,5 +8,5 @@ export const renderNumberOrLoading = (
         return value;
     }
 
-    return <SmallLoading size={19.5} hasLabel={options?.showLabel ?? false} />;
+    return <SmallLoading size={22.5} hasLabel={options?.showLabel ?? false} />;
 };
