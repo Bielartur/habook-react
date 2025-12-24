@@ -41,7 +41,7 @@ export const ListCardCompletedBooks = () => {
 
     return (
         <ListCards
-            startDelay={0.48}
+            startDelay={0.60}
             items={completedBooks}
             autoFill
             getKey={(item) => `completed-books-${item.livro.id}`}

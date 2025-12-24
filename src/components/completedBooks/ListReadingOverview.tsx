@@ -49,6 +49,7 @@ export const ListReadingOverview = () => {
 
     return (
         <ListCards
+            startDelay={0.12}
             items={readingOverviews}
             getKey={({ label }) => `reading-overview-${label}`}
             renderItem={({ label, icon, value, rating, bgColor }) => (
