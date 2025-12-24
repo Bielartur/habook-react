@@ -3,12 +3,13 @@ import Box from "@mui/material/Box";
 
 type Props = {
     hasLabel?: boolean;
+    size?: number | "xs" | "sm" | "md" | "lg" | "xl";
 }
 
-export const SmallLoading = ({hasLabel = true}: Props) => {
+export const SmallLoading = ({ size = 18, hasLabel = true}: Props) => {
     return (
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "0.25rem", gap: "0.5rem" }}>
-            <CircularProgress color="inherit" size={18} className="text-slate-600" />
+            <CircularProgress color="inherit" size={size} className="text-slate-600" />
             {hasLabel && <span>Carregando...</span>}
         </Box>
     )

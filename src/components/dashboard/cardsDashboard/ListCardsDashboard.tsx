@@ -50,11 +50,13 @@ export const ListCardsDashboard = ({paginasLidas, pctConcluida, diasConsecutivos
 
     return (
         <ListCards
-            cards={infoCards.map((item) => (
-                <CardDashboard key={`card-dashboard-${item.label}`} infoCard={item}>
+            items={infoCards}
+            getKey={(item) => `card-dashboard-${item.label}`}
+            renderItem={(item) => (
+                <CardDashboard infoCard={item}>
                     {item.complemento}
                 </CardDashboard>
-            ))}
+            )}
         />
     )
 }

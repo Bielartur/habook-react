@@ -1,6 +1,7 @@
 import {CardRecentCompletedBook} from "./CardRecentCompletedBook.tsx";
 import type {UserLivro} from "../../../../models/UserBooks.ts";
 import {BigLoading} from "../../../shared/loadings/BigLoading.tsx";
+import {ListCards} from "../../../shared/ListCards.tsx";
 
 type Props = {
     isLoading: boolean;
@@ -22,18 +23,19 @@ export const ListCardRecentCompletedBooks = ({isLoading, recentCompletedBooks }:
     }
 
     return (
-        <div className="w-full py-4 grid gap-4"
-             style={{gridTemplateColumns: `repeat(auto-fill, minmax(16rem, 1fr))`}}
-        >
-            {recentCompletedBooks.length > 0 && (
-                recentCompletedBooks.map((item, index) => (
-                    <CardRecentCompletedBook
-                        key={`recent-completed-book-${index}`}
-                        livro={item.livro}
-                        progresso={item.progresso}
-                    />
-                ))
+        <ListCards
+            items={recentCompletedBooks}
+            minWidth="16rem"
+            autoFill
+            className="gap-4"
+            getKey={(item) => `recent-completed-book-${item.livro.id}`}
+            renderItem={(item) => (
+                <CardRecentCompletedBook
+                    livro={item.livro}
+                    progresso={item.progresso}
+                />
             )}
-        </div>
+        />
+
     )
 }

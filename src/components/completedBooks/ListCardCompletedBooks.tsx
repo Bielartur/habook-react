@@ -10,26 +10,28 @@ import {BigLoading} from "../shared/loadings/BigLoading.tsx";
 export const ListCardCompletedBooks = () => {
     const {getUserBooks} = useRequests()
     const [completedBooks, setCompletedBooks] = useState<UserLivro[]>([])
-    const [loading, setLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const loadUserBooks = async () => {
-            const response: ApiResponse<UserLivro[]> = await getUserBooks({status: "concluidos"});
+            try {
+                const response: ApiResponse<UserLivro[]> = await getUserBooks({ status: "concluidos" });
 
-            if (!response.success || !response.payload) return;
-
-            setLoading(false)
-            setCompletedBooks(response.payload);
-        }
+                if (response.success && response.payload) {
+                    setCompletedBooks(response.payload);
+                }
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
         loadUserBooks();
-    }, [getUserBooks])
+    }, [getUserBooks]);
 
 
-    if (loading) {
-        <BigLoading className="my-16"/>
-    }
-    else if (completedBooks.length === 0) {
+    if (isLoading) {
+        return <BigLoading className="my-16"/>
+    } else if (completedBooks.length === 0) {
         return (
             <div className="h-48 w-full flex items-center justify-center">
                 <p className="text-xl font-semibold italic text-slate-600">Nenhum livro concluído até o momento</p>
@@ -39,14 +41,15 @@ export const ListCardCompletedBooks = () => {
 
     return (
         <ListCards
-            autoFill={true}
-            cards={completedBooks.map(({livro, progresso}) => (
+            items={completedBooks}
+            autoFill
+            getKey={(item) => `completed-books-${item.livro.id}`}
+            renderItem={(item) => (
                 <CardCompletedBooks
-                    key={"completed-books-" + livro.id}
-                    livro={livro}
-                    progresso={progresso}
+                    livro={item.livro}
+                    progresso={item.progresso}
                 />
-            ))}
+            )}
         />
     )
 }

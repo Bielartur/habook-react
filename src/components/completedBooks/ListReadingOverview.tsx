@@ -49,16 +49,18 @@ export const ListReadingOverview = () => {
 
     return (
         <ListCards
-            cards={readingOverviews.map(({label, icon, value, rating, bgColor}) => (
+            items={readingOverviews}
+            getKey={({ label }) => `reading-overview-${label}`}
+            renderItem={({ label, icon, value, rating, bgColor }) => (
                 <ReadingOverview
-                    key={"reading-overview-" + label}
                     label={label}
                     value={value}
                     icon={icon}
                     rating={rating}
                     bgColor={bgColor}
                 />
-            ))}
+            )}
         />
+
     )
 }

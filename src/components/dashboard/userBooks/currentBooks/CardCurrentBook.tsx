@@ -41,7 +41,7 @@ export const CardCurrentBook = ({livro, progresso}: Props) => {
     const percentualRestante = 100 - progresso_percentual;
 
     return (
-        <CardContainer key={`livro-${livro.id}`}>
+        <CardContainer>
             <div className="flex items-start space-x-4 mb-4">
                 <div className="relative">
                     <img

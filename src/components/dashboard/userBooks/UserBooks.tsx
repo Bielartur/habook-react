@@ -9,6 +9,7 @@ import {useEffect, useState} from "react";
 import type {ApiResponse} from "../../../models/Auth.ts";
 import type {UserLivro} from "../../../models/UserBooks.ts";
 import {useRequests} from "../../../hooks/useRequests.ts";
+import toast from "react-hot-toast";
 
 export const UserBooks = () => {
     const { getUserBooks } = useRequests()
@@ -17,17 +18,33 @@ export const UserBooks = () => {
     const { refresh } = useAuth()
 
     useEffect(() => {
+        let cancelled = false;
+
         const loadUserBooks = async () => {
-            const response: ApiResponse<UserLivro[]> = await getUserBooks({ordering: "titulo"});
+            try {
+                const response: ApiResponse<UserLivro[]> =
+                    await getUserBooks({ ordering: "titulo" });
 
-            if (!response.success || !response.payload) return;
-
-            setIsLoading(false)
-            setUserBooks(response.payload);
-        }
+                if (!cancelled && response.success && response.payload) {
+                    setUserBooks(response.payload);
+                }
+            } catch (err) {
+                const message = "Erro ao carregar livros:"
+                console.error(message, err);
+                toast.error(message);
+            } finally {
+                if (!cancelled) {
+                    setIsLoading(false);
+                }
+            }
+        };
 
         loadUserBooks();
-    }, [refresh, getUserBooks])
+
+        return () => {
+            cancelled = true;
+        };
+    }, [refresh, getUserBooks]);
 
     const currentBooks = userBooks.filter((book) => book.progresso.status.codigo === "em_andamento")
     const completedBooks = userBooks.filter((book) => book.progresso.status.codigo === "concluido")

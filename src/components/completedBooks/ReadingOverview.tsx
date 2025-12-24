@@ -3,7 +3,6 @@ import {StarRating} from "../shared/StarRating.tsx";
 import {renderNumberOrLoading} from "../shared/loadings/renderNumberOrLoading.tsx";
 
 type Props = {
-    key: number | string;
     label: string;
     value?: number | React.ReactNode;
     icon: React.ReactNode
