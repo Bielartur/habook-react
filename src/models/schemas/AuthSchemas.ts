@@ -24,3 +24,11 @@ export const changePasswordSchema = yup.object({
     new_password: passwordSchema,
     confirm_password: confirmPasswordFor("new_password"),
 })
+
+export const editUserSchema = yup.object({
+    name: yup
+        .string()
+        .required("O primeiro nome é obrigatório").min(3, "O nome deve conter ao menos 3 letras")
+        .matches(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/, "Apenas letras são permitidas"),
+    email: yup.string().email("Email inválido").required("O email é obrigatório"),
+})

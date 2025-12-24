@@ -8,7 +8,7 @@ export type User = {
     meta_diaria_paginas: number | null
     date_joined: string
     last_login: string
-    livros: number[]
+    // livros: number[]
 }
 
 export type UserGoalsForm = {
@@ -22,3 +22,10 @@ export type UserChangeForm = {
     new_password: string
     confirm_password: string
 }
+
+export type UserChangeProfile = {
+    name: string
+    email: string
+}
+
+export type UserProfilePatch = Pick<User, "id" | "name" | "email">;
