@@ -15,12 +15,13 @@ export const GoalsConfig = () => {
                 <FormContainer
                     title="Defina suas metas de páginas"
                     subtitle="Configure suas metas anuais e mensais de leitura"
+                    delay={0.06}
                 >
                     <GoalsForm id={"goals-form-modal"}
                                onSubmittingChange={setIsSubmitting}
                     />
                 </ FormContainer>
-                <ButtonSave form={"goals-form-modal"} type={"submit"} disabled={isSubmitting}/>
+                <ButtonSave delay={0.12} form={"goals-form-modal"} type={"submit"} disabled={isSubmitting}/>
             </WrapperConfig>
         </>
     )

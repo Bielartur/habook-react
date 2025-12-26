@@ -1,14 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBars } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faX } from "@fortawesome/free-solid-svg-icons"
 import { faBook } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router"
 import { NavList } from "../shared/nav/NavList"
+import { useState } from "react";
 
 
 export const Navbar = () => {
+    const [open, setOpen] = useState(false)
+
     return (
         <header
-            className="sticky min-h-(--navbar-height) top-0 z-100 flex items-center justify-center border-b border-slate-200 bg-white/80 backdrop-blur px-3 font-semibold transition ease-in-out"
+            className={`sticky min-h-(--navbar-height) top-0 z-100 flex flex-col items-center justify-center border-b border-slate-200 ${open ? "bg-white/80" : "bg-white"} backdrop-blur px-3 font-semibold`}
         >
             <div className="w-full flex items-center justify-between h-(--navbar-height) max-w-6xl">
 
@@ -25,14 +28,16 @@ export const Navbar = () => {
 
                 {/* Botão hamburguer (mostra até md) */}
                 <button
-                    id="nav-toggle"
+                    onClick={() => {
+                        setOpen((prev) => !prev)
+                    }}
                     className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-slate-600 hover:bg-slate-200 hover:text-slate-700"
                     aria-controls="mobile-menu"
                     aria-expanded="false"
                     type="button"
                 >
                     <span className="sr-only">Abrir menu</span>
-                    <FontAwesomeIcon icon={faBars} className="text-xl cursor-pointer" />
+                    <FontAwesomeIcon icon={open ? faX : faBars} className="text-xl cursor-pointer" />
                 </button>
 
                 {/* Nav desktop (a partir de md) */}
@@ -42,9 +47,16 @@ export const Navbar = () => {
             </div>
 
             {/* Menu mobile (dropdown) */}
-            <div id="mobile-menu" className="md:hidden w-full max-w-208 mx-auto px-3 pb-3 hidden">
-                <nav className="mt-2 flex flex-col gap-1 rounded-lg border border-slate-200 bg-white/90 p-2 shadow-sm">
-
+            <div
+                className={[
+                    "md:hidden w-full max-w-208 mx-auto px-3 pb-3",
+                    "overflow-hidden",
+                    "transition-[height,opacity] duration-300 ease-out",
+                    open ? "h-auto opacity-100" : "h-0 opacity-0 pointer-events-none",
+                ].join(" ")}
+            >
+                <nav className="mt-2 max-w-64 mx-auto flex flex-col gap-1 rounded-lg border border-slate-200 bg-white/90 p-2 shadow-sm">
+                    <NavList onNavigate={() => setOpen(false)} />
                 </nav>
             </div>
         </header>
