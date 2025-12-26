@@ -4,9 +4,9 @@ type Props = {
     className?: string;
 }
 
-export const AuthWrapper = ({ children, className }: Props) => {
+export const AuthWrapper = ({ children, className = "" }: Props) => {
     return (
-        <header className={`absolute h-full w-full flex items-center justify-center ${className}`}>
+        <header className={`absolute h-full w-full flex sm:items-center justify-center ${className}`}>
             { children }
         </header>
     )
