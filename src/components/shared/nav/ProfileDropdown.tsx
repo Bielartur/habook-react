@@ -46,7 +46,7 @@ export const ProfileDropdown = () => {
             </NavItemButton>
 
             <Activity mode={isOpen ? "visible" : "hidden"}>
-                <div className="absolute right-0 left-0 top-0 z-150 w-28 bg-white rounded-md shadow-lg flex flex-col gap-2">
+                <div className="absolute -right-20 -top-20 md:right-0 md:left-0 md:top-0 z-150 w-28 bg-white rounded-md shadow-lg flex flex-col gap-2">
                     <NavListDropdown />
                 </div>
             </Activity>
