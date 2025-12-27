@@ -8,7 +8,7 @@ export function PrivateRoute() {
     const location = useLocation();
 
     if (loading) {
-        return <SmallLoading />; // ou um spinner bonitinho
+        return <SmallLoading />;
     }
 
     // Se não estiver logado, manda para o login

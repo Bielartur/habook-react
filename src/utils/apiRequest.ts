@@ -53,6 +53,7 @@ export async function apiRequest<T>(
             headers.Authorization = `Bearer ${token}`;
         }
 
+
         return {
             url: `${BASE_URL}/${endpoint}`,
             method: method as Method,
@@ -86,6 +87,7 @@ export async function apiRequest<T>(
 
         return res1.data;
     } catch (err) {
+        console.log(err);
         const apiErr = normalizeAxiosError(err);
 
         // 2) se veio como erro HTTP e normalize identificou token inválido,

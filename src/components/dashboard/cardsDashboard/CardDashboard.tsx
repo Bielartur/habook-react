@@ -1,16 +1,17 @@
 import { CardContainer } from "../../shared/containers/CardContainer"
+import type {JSX} from "react";
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
     infoCard: {
         label: string
-        icon: React.ReactNode
-        qtd: number
+        icon: JSX.Element
+        qtd: React.ReactNode
         descricao_qtd: string
         bgColor: string
         textColor: string
         complemento?: React.ReactNode
     }
-    children?: React.ReactNode
+    children?: JSX.Element
 }
 
 export const CardDashboard = ({ infoCard, children, ...props }: Props) => {

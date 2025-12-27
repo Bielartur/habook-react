@@ -1,5 +1,5 @@
 // BookSearchSection.tsx
-import {useEffect, useRef, useState} from "react";
+import {type Dispatch, type SetStateAction, useEffect, useRef, useState} from "react";
 import {CreateBookForm} from "./CreateBookForm.tsx";
 
 import type {BookResult, BookFormValues, FieldLocks} from "../../../../models/GoogleApi.ts";
@@ -8,7 +8,12 @@ import {SearchInputGradient} from "../../../shared/inputs/SearchInputGradient.ts
 
 const MIN_CHARS = 1;
 
-export const BookSearchSection = () => {
+type Props = {
+    setIsSubmitting: (isSubmitting: boolean) => void;
+    setIsOpen: Dispatch<SetStateAction<boolean>>
+}
+
+export const BookSearchSection = ({ setIsSubmitting, setIsOpen }: Props) => {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<BookResult[]>([]);
     const [status, setStatus] = useState<
@@ -150,10 +155,6 @@ export const BookSearchSection = () => {
         // NOTE: não limpo formValues, igual ao script original
     }
 
-    // handlers para edição manual dos campos destravados
-    function updateField(field: keyof BookFormValues, value: string) {
-        setFormValues((prev) => ({...prev, [field]: value}));
-    }
 
     return (
         <div className="flex-1 relative">
@@ -276,7 +277,8 @@ export const BookSearchSection = () => {
             <CreateBookForm
                 values={formValues}
                 locks={locks}
-                onChangeField={updateField}
+                onSubmittingChange={setIsSubmitting}
+                setIsOpen={setIsOpen}
             />
         </div>
     );

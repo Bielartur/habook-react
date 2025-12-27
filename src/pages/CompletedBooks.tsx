@@ -8,6 +8,7 @@ export const CompletedBooks = () => {
     return (
         <Section>
             <PageTitle
+                id="completedBooks"
                 title="Livros Concluídos"
                 subtitle="Celebre suas conquistas literárias e reviva suas leituras favoritas"
             />

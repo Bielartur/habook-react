@@ -2,8 +2,9 @@ import {useEffect, useState} from "react";
 import { AuthContext, type AuthContextValue } from "./AuthContext.tsx";
 import {useRequests} from "../hooks/useRequests.ts";
 import {clearAccessToken, setAccessToken} from "../utils/HelpersToken.ts";
-import type {ApiResponse, User} from "../models/Auth.ts";
+import type {ApiResponse} from "../models/Auth.ts";
 import toast from "react-hot-toast";
+import type {User} from "../models/User.ts";
 
 type Props = {
     children: React.ReactNode;
@@ -15,6 +16,7 @@ export const AuthProvider = ({ children }: Props) => {
     const [isLogged, setIsLogged] = useState(false);
     const [userData, setUserData] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
+    const [refresh, setRefresh] = useState<boolean>(false);
 
     useEffect(() => {
         void handleInitUser();
@@ -104,6 +106,8 @@ export const AuthProvider = ({ children }: Props) => {
         setIsLogged,
         userData,
         setUserData,
+        refresh,
+        setRefresh,
         handleSignIn,
         handleLogout,
         loading,

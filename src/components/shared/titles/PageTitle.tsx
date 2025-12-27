@@ -3,11 +3,12 @@ type Props = {
     title: string
     subtitle: string
     className?: string
+    id?: string
 }
 
-export const PageTitle = ({ title, subtitle, className = "" }: Props) => {
+export const PageTitle = ({id, title, subtitle, className = "" }: Props) => {
     return (
-        <div className={`text-center my-2 fade-in ${className}`}>
+        <div id={id ?? undefined} className={`text-center my-2 animate-fade-in ${className}`}>
             <div>
                 <h1 className="text-4xl md:text-5xl font-bold mb-4">
                     <span className="text-gradient w-fit">{ title }</span>

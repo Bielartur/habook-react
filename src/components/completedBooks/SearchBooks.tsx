@@ -8,7 +8,7 @@ export const SearchBooks = () => {
     const [inputValue, setInputValue] = useState('');
 
     return (
-        <CardContainer className="w-full" hoverEffect={false}>
+        <CardContainer delay={0.36} className="w-full" hoverEffect={false}>
             <div className="flex flex-col grow sm:flex-row gap-4">
                 <div className="flex-1 relative">
                     <FontAwesomeIcon

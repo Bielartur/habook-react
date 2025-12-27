@@ -5,7 +5,7 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 export const NavItemButton = ({ children, className = "", ...props }: Props) => {
     return (
         <button
-            className={`nav-item space-x-1.5 cursor-pointer relative ${className}`}
+            className={`nav-item w-full space-x-1.5 cursor-pointer relative ${className}`}
             {...props}
         >
             { children }

@@ -38,3 +38,25 @@ export interface UserLivro {
     progresso: Progresso;
 }
 
+export interface GetUserBooksParams {
+    status?: "em_andamento" | "concluidos" | "abandonados";
+    q?: string; // Busca por título ou por autor
+    categoria_id?: number;
+    autor?: string;
+    min_paginas?: number;
+    max_paginas?: number;
+    ids?: Array<number>;
+    ordering?: "titulo" | "-titulo" | "autor" | "-autor" | "paginas" | "-paginas"
+    | "publicado" | "-publicado" | "atualizado" | "-atualizado" | "avaliacao_media"
+    | "-avaliacao_media" | "-qtd_avaliacoes"
+    ;
+}
+
+export type UpdatePagesPayload =
+    | { delta_paginas: number; pagina_atual?: never }
+    | { pagina_atual: number; delta_paginas?: never };
+
+export type updatePagesResponse = {
+    pagina_atual: number;
+    concluido_em: string | null;
+}

@@ -10,7 +10,7 @@ export const ConfigLayout = () => {
         <>
             <Navbar/>
             <Main>
-                <Section className={"flex-row"}>
+                <Section className="md:flex-row">
                     <Sidebar/>
                     <div className="w-full flex grow flex-col">
                         <Outlet/>

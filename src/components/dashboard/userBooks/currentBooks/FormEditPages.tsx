@@ -1,20 +1,26 @@
-import {BasicInput} from "../../shared/inputs/BasicInput.tsx";
-import {ButtonGradient} from "../../shared/buttons/ButtonGradient.tsx";
-import {ButtonSubtle} from "../../shared/buttons/ButtonSubtle.tsx";
+import {BasicInput} from "../../../shared/inputs/BasicInput.tsx";
+import {ButtonGradient} from "../../../shared/buttons/ButtonGradient.tsx";
+import {ButtonSubtle} from "../../../shared/buttons/ButtonSubtle.tsx";
 import {Activity, useEffect, useRef, useState} from "react";
 import {Pen} from "lucide-react";
+import type {UpdatePagesPayload} from "../../../../models/UserBooks.ts";
 
-type Props = {
+type Props = Omit<React.FormHTMLAttributes<HTMLFormElement>, "onSubmit"> & {
     paginaAtual: number
-    // setPaginaAtual:  React.Dispatch<React.SetStateAction<number>>
     totalPaginas: number
+    onValidSubmit: (data: UpdatePagesPayload) => Promise<void> | void
 }
 
-export const FormEditPages = ({ paginaAtual, totalPaginas }: Props) => {
+
+export const FormEditPages = ({ paginaAtual, totalPaginas, onValidSubmit, ...props }: Props) => {
     const containerRef = useRef<HTMLFormElement | null>(null);
     const inputRef = useRef<HTMLInputElement | null>(null);
     const [isEditing, setIsEditing] = useState(false);
     const [editingValue, setEditingValue] = useState(paginaAtual);
+
+    useEffect(() => {
+        setEditingValue(paginaAtual);
+    }, [paginaAtual]);
 
     useEffect(() => {
         if (!isEditing) return;
@@ -63,14 +69,14 @@ export const FormEditPages = ({ paginaAtual, totalPaginas }: Props) => {
     };
 
 
-    const handleSubmitChange = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmitChange = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsEditing(false);
-        // setPaginaAtual(Number(editingValue));
+        onValidSubmit({pagina_atual: editingValue})
     };
 
     return (
-        <form ref={containerRef} onSubmit={handleSubmitChange} className="flex items-center space-x-2">
+        <form ref={containerRef} onSubmit={onSubmitChange} className="flex items-center space-x-2" {...props}>
             <Activity mode={isEditing ? "visible" : "hidden"}>
                 <BasicInput ref={inputRef} type="number" value={editingValue}
                             onChange={handleChangePagina}

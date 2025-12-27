@@ -5,7 +5,7 @@ type Props = {
 
 export const AuthContainer = ({ children }: Props) => {
     return (
-        <div className="bg-white w-full h-[calc(100%-var(--footer-height))] md:w-4/5 md:h-4/5 max-w-5xl flex md:shadow-xl rounded-sm flex-col md:flex-row relative">
+        <div className="bg-white w-full min-h-[calc(100%-var(--footer-height))] h-full lg:w-4/5 lg:h-4/5 max-w-5xl flex lg:shadow-xl rounded-sm flex-col lg:flex-row relative">
             { children }
         </div>
 
