@@ -1,7 +1,8 @@
 import { CardContainer } from "../../shared/containers/CardContainer"
 import type {JSX} from "react";
+import type {HTMLMotionProps} from "framer-motion";
 
-type Props = React.HTMLAttributes<HTMLDivElement> & {
+type Props = HTMLMotionProps<"div"> & {
     infoCard: {
         label: string
         icon: JSX.Element
