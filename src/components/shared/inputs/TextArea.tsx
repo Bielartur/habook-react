@@ -10,6 +10,7 @@ type Props = React.InputHTMLAttributes<HTMLTextAreaElement> & {
     helpText?: string
     value?: string
     maxLength?: number
+    optional?: boolean
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
@@ -20,6 +21,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
             className = "",
             classNameContainer = "",
             required = false,
+            optional = false,
             helpText,
             value,
             maxLength,
@@ -30,7 +32,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
         return (
             <div className={`flex flex-col gap-0.5 w-full ${classNameContainer}`}>
                 {label && (
-                    <Label faIcon={faIcon} text={label} required={required} />
+                    <Label faIcon={faIcon} text={label} required={required} optional={optional} />
                 )}
 
                 <textarea

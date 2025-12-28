@@ -1,13 +1,21 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
-import { useState } from "react";
+import { useState, Activity } from "react";
 
 type Props = {
     value: number | null;
     onChange: (rating: number) => void;
     maxStars?: number;
-    sizeClassName?: string;
+    sizeClassName?: "text-xs" | "text-sm" | "text-md" | "text-lg" | "text-xl" | "text-2xl" | "text-3xl" | "text-4xl" | "text-5xl" | "text-6xl" | "text-7xl";
+};
+
+const ratingLabels: Record<number, string> = {
+    1: "Péssimo",
+    2: "Ruim",
+    3: "Regular",
+    4: "Bom",
+    5: "Ótimo",
 };
 
 export const StarRatingInput = ({ value, onChange, maxStars = 5, sizeClassName = "text-2xl" }: Props) => {
@@ -41,7 +49,7 @@ export const StarRatingInput = ({ value, onChange, maxStars = 5, sizeClassName =
                     <button
                         key={starIndex}
                         type="button"
-                        className="p-1 cursor-pointer focus:outline-none transition-transform hover:scale-110 active:scale-95"
+                        className="relative flex flex-col items-center p-1 cursor-pointer focus:outline-none transition-transform hover:scale-110 active:scale-95"
                         onMouseEnter={() => handleMouseEnter(starIndex)}
                         onMouseLeave={handleMouseLeave}
                         onClick={() => handleClick(starIndex)}
@@ -52,6 +60,11 @@ export const StarRatingInput = ({ value, onChange, maxStars = 5, sizeClassName =
                             className={`${sizeClassName} transition-colors ${isFilled ? "text-yellow-400" : "text-gray-300"
                                 } ${isFilled && !isConfirmed ? "opacity-30" : "opacity-100"}`}
                         />
+                        <Activity mode={hoverRating === starIndex || starIndex === value ? "visible" : "hidden"}>
+                            <span className="absolute top-full text-xs font-medium text-gray-600 whitespace-nowrap">
+                                {ratingLabels[starIndex]}
+                            </span>
+                        </Activity>
                     </button>
                 );
             })}
