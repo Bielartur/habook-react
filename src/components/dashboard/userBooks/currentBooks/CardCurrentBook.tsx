@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import {FormAddDefinedPages} from "./FormAddDefinedPages.tsx";
 import {useAuth} from "../../../../hooks/useAuth.tsx";
 import {useState} from "react";
+import {RatingBooksModal} from "../../modals/ratingBooks/RatingBooksModal.tsx";
 
 
 type Props = {
@@ -23,6 +24,8 @@ export const CardCurrentBook = ({livro, progresso}: Props) => {
     const [loading, setLoading] = useState<boolean>(false)
 
     const onSubmit = async (data: UpdatePagesPayload) => {
+        if (data.pagina_atual === progresso.pagina_atual) return;
+
         setLoading(true)
         const response = await updatePages(livro.id, data)
 
@@ -30,6 +33,11 @@ export const CardCurrentBook = ({livro, progresso}: Props) => {
             setRefresh((prev) => !prev)
             setLoading(false)
             toast.success(response.message)
+
+            if (response.payload?.concluido_em) {
+                console.log(response.payload.concluido_em)
+                console.log("Vou abrir o modal de avaliação")
+            }
         } else {
             setLoading(false)
             toast.error(response.message)
@@ -83,6 +91,7 @@ export const CardCurrentBook = ({livro, progresso}: Props) => {
                 </div>
 
                 <FormAddDefinedPages isLoading={loading} onValidSubmit={onSubmit}/>
+                <RatingBooksModal bookId={livro.id} />
             </div>
         </CardContainer>
     )

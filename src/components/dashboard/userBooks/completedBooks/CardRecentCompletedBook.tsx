@@ -1,5 +1,5 @@
 import {CardContainer} from "../../../shared/containers/CardContainer.tsx";
-import {StarRating} from "../../../shared/StarRating.tsx";
+import {StarRating} from "../../../shared/stars/StarRating.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from "@fortawesome/free-regular-svg-icons";
 import type {UserLivro} from "../../../../models/UserBooks.ts";

@@ -1,5 +1,5 @@
 import {CardContainer} from "../shared/containers/CardContainer.tsx";
-import {StarRating} from "../shared/StarRating.tsx";
+import {StarRating} from "../shared/stars/StarRating.tsx";
 import {renderNumberOrLoading} from "../shared/loadings/renderNumberOrLoading.tsx";
 
 type Props = {

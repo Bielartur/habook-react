@@ -1,7 +1,7 @@
 import {CardContainer} from "../shared/containers/CardContainer.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCalendar} from "@fortawesome/free-regular-svg-icons";
-import {StarRating} from "../shared/StarRating.tsx";
+import {StarRating} from "../shared/stars/StarRating.tsx";
 import type {UserLivro} from "../../models/UserBooks.ts";
 import {formatDate} from "../../utils/globalHelpers.ts";
 import {SmallLoading} from "../shared/loadings/SmallLoading.tsx";

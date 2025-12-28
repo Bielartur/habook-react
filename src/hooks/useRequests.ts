@@ -11,6 +11,7 @@ import type {
     UserGoalsForm,
     UserProfilePatch,
 } from "../models/User.ts";
+import type { AddRatingFormData } from "../models/Rating.ts";
 
 type QueryPrimitive = string | number | boolean;
 type QueryValue = QueryPrimitive | QueryPrimitive[] | undefined;
@@ -108,6 +109,9 @@ const updatePages = async (  book_id: number, payload: UpdatePagesPayload) => {
     return await apiRequest<updatePagesResponse>(`me/books/${book_id}/progress`, "PATCH", payload, true);
 }
 
+const addRating = async (book_id: number, payload: AddRatingFormData) => {
+    return await apiRequest(`me/books/${book_id}/rating`, "POST", payload, true);
+}
 
 
 // Exportando todas as requests
@@ -134,4 +138,5 @@ export const useRequests = () => ({
     addBook,
     updatePages,
     getCategories,
+    addRating,
 });
